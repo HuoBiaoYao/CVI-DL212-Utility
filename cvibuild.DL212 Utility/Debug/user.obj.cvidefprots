@@ -1,0 +1,16 @@
+[Set_ATTR_DIMMED]
+Class="Function"
+Prototype="int Set_ATTR_DIMMED(int state);"
+
+[COM_Enumerate]
+Class="Function"
+Prototype="int COM_Enumerate();"
+
+[Compare]
+Class="Function"
+Prototype="int Compare(const void *a, const void *b);"
+
+[LRC]
+Class="Function"
+Prototype="unsigned char LRC(unsigned char *buf, unsigned short len);"
+
