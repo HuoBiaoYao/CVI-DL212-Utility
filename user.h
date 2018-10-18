@@ -11,15 +11,42 @@
 
 #define errChk    
 
+#define CLOSE     0
+#define OPER      1
+
+#define VOLT_DIFF 0
+#define VOLT_SE   1 
+
 struct _COM{
   unsigned char number;
   int status;
 };
+
+struct _DL212_CONFIG{
+  char device_id[2];
+  unsigned int scan;
+  unsigned char mode[5];//差分1，差分2，差分3，DI，D2
+  unsigned char sw[11];
+  unsigned char rang[6];
+  unsigned char vx_sw[6];
+  float vx_value[6];
+  float mul[10];
+  float offset[10];
+  unsigned char datatype[4];//周期，频率，计数
+  char s0[2];//分隔符
+  char s1[2];//起始符
+  char s2[2];//终止符
+  char sdi12_cmd[2][400];
+};
+
 extern struct _COM sCOM; 
+struct _DL212_CONFIG sDL212_CONFIG;	
+extern int panelHandle,TabPanel_0_Handle,TabPanel_1_Handle,TabPanel_2_Handle;  
 
-extern int panelHandle;
-
-int Set_ATTR_DIMMED(int state);
+int GetDL212Rings(void);
+int GetDL212Numerices(void);
+int GetDL212Strings(void);
+int ATTRDimmed_Ctrl(void);
 int COM_Enumerate(void);
 int Compare(const void*a,const void*b);
 unsigned char LRC( unsigned char *buf,unsigned short int len);

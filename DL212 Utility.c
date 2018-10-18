@@ -1,13 +1,10 @@
 #include "user.h"
 
 unsigned char QuitCtrl=1;
-int PANEL_TB_COM_CTRL_Value;
+int PANEL_TB_COM_CTRL_Value;	   
+int panelHandle,TabPanel_0_Handle,TabPanel_1_Handle,TabPanel_2_Handle;
 
-
-int panelHandle;
-
-int main (int argc, char *argv[])
-{
+int main (int argc, char *argv[]){
 	int len;
 	char dirname[MAX_PATHNAME_LEN];
 	
@@ -15,14 +12,14 @@ int main (int argc, char *argv[])
 		return -1;	/* out of memory */
 	if ((panelHandle = LoadPanel (0, "DL212 Utility.uir", PANEL)) < 0)
 		return -1; 
-	
+	GetPanelHandleFromTabPage (panelHandle, PANEL_TAB, 0, &TabPanel_0_Handle); 
+	GetPanelHandleFromTabPage (panelHandle, PANEL_TAB, 1, &TabPanel_1_Handle);  
+	GetPanelHandleFromTabPage (panelHandle, PANEL_TAB, 2, &TabPanel_2_Handle);  
     DisplayPanel (panelHandle);
-	//RecallPanelState (panelHandle, "panel_state", 0);
-	//com			  
+	//RecallPanelState (panelHandle, "panel_state", 0);				 			  
 	COM_Enumerate();
   	GetCtrlVal (panelHandle, PANEL_RING_COM,&sCOM.number);  
-	
-    
+			    
 	SetSleepPolicy (VAL_SLEEP_MORE);   
     //RunUserInterface ();
 	while(QuitCtrl){
@@ -41,7 +38,7 @@ int CVICALLBACK ComSelect_CB (int panel, int control, int event,
 			break;
 		case EVENT_COMMIT:
 			ComWrt (sCOM.number, "value display off", 18);  
-			Set_ATTR_DIMMED(1);								   
+			//Set_ATTR_DIMMED(1);								   
 			SetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, 0);
 			CloseCom (sCOM.number);
 			PANEL_TB_COM_CTRL_Value = 0;
@@ -59,7 +56,7 @@ int  CVICALLBACK ComCtrl_CB(int panel, int control, int event, void *callbackDat
 			GetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, &PANEL_TB_COM_CTRL_Value); 
 	        if(0 == PANEL_TB_COM_CTRL_Value){
 				ComWrt (sCOM.number, "value display off", 18);  
-				Set_ATTR_DIMMED(1);								   
+				//Set_ATTR_DIMMED(1);								   
 				//SetCtrlVal (panelHandle, PANEL_TOGGLEBUTTON, 0);
 				CloseCom (sCOM.number);
 				sCOM.status = -1;
@@ -73,18 +70,14 @@ int  CVICALLBACK ComCtrl_CB(int panel, int control, int event, void *callbackDat
 				else{
 					SetComTime(sCOM.number,2);
 					FlushOutQ (sCOM.number);
-				    Set_ATTR_DIMMED(0);      
+				    //Set_ATTR_DIMMED(0);      
 				}	  
 			}  
 			break;
 	}
 	return 0;
 }
-
-int  CVICALLBACK DeviceID_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){ return 0; }
-int  CVICALLBACK EndSymbol_D1_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK EndSymbol_D2_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}	
-
+ 
 int  CVICALLBACK MainPanel_CB(int panel, int event, void *callbackData, int eventData1, int eventData2){
 	switch (event)
 	{
@@ -103,56 +96,47 @@ int  CVICALLBACK MainPanel_CB(int panel, int event, void *callbackData, int even
 	return 0;
 }
 
-int  CVICALLBACK Mul_1H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Mul_1L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Mul_2H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Mul_2L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Mul_3H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Mul_3L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Mul_PLL_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Mul_PSW_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Offset_1H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Offset_1L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Offset_2H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Offset_2L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Offset_3H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Offset_3L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Offset_PLL_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Offset_PSW_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK PowerDispaly_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Range_1H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Range_1L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Range_2H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Range_2L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Range_3H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Range_3L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK ScanInterval_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Sdi12Cmd_D1(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Sdi12Cmd_D2(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Separator_D1_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Separator_D2_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK SetMode_D1_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK SetMode_D2_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK SetMode_HL1_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK SetMode_HL2_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK SetMode_HL3_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK SetMode_PLL_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK SetMode_PSW_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK StartSymbol_D1_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK StartSymbol_D2_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Switch_1H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Switch_1L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Switch_2H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Switch_2L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Switch_3H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Switch_3L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Switch_D1_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Switch_D2_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Switch_PLL_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Switch_PSW_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Switch_SW12_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}   
 
-static const char * DaysOfWeek[] = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+int  CVICALLBACK NumericesSet_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
+	switch (event){       
+		case EVENT_VAL_CHANGED:
+			GetDL212Numerices(); 
+		break;
+	    default:
+		break;
+	}
+	return 0;
+}
+
+int  CVICALLBACK RingsConfig_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
+	switch (event){       
+		case EVENT_VAL_CHANGED:
+			GetDL212Rings();
+			ATTRDimmed_Ctrl();
+		break;
+	    default:
+		break;
+	}
+	return 0;
+}
+ 
+int  CVICALLBACK StringsSet_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
+	switch (event){       
+		case EVENT_VAL_CHANGED:
+			GetDL212Strings(); 
+		break;
+	    default:
+		break;
+	}
+	return 0;
+}
+
+int  CVICALLBACK Sdi12CmdSet_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
+	
+	return 0;
+}
+ 
+static const char *DaysOfWeek[] = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
 int  CVICALLBACK Timer_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
 	unsigned int year, month, day, hour, min, sec, weekDay;
 	char buffer[512];
@@ -171,17 +155,4 @@ int  CVICALLBACK Timer_CB(int panel, int control, int event, void *callbackData,
 	}
 	return 0;
 }	
- 	
-int  CVICALLBACK Vx_Switch_1H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Vx_Switch_1L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Vx_Switch_2H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Vx_Switch_2L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Vx_Switch_3H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Vx_Switch_3L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Vx_Value_1H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Vx_Value_1L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Vx_Value_2H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Vx_Value_2L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Vx_Value_3H_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-int  CVICALLBACK Vx_Value_3L_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){return 0;}
-
+ 

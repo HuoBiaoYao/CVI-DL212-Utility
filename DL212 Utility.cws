@@ -12,7 +12,7 @@ VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
 Number of Projects = 1
 Active Project = 1
 Project 0001 = "DL212 Utility.prj"
-Drag Bar Left = 219
+Drag Bar Left = 197
 Window Top = 247
 Window Left = 26
 Window Bottom = 749
@@ -32,7 +32,7 @@ Break At First Statement = False
 Sort Type = "File Name"
 Number of Opened Files = 5
 Window Confinement Region Enabled = True
-MainColumnWidth = 202
+MainColumnWidth = 180
 FileDateColumnWidth = 70
 FileSizeColumnWidth = 70
 
@@ -46,62 +46,62 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.uir"
-File Type = "User Interface Resource"
-Disk Date = 3622617222
-In Projects = ""
-Window Top = 62
-Window Left = 26
-Window Height = 407
-Window Width = 688
-Window Z-Order = 2
-
-[File 0002]
-Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.c"
+Path = "/d/GitHubRepository/CVI-DL212-Utility/user.c"
 File Type = "CSource"
-Disk Date = 3622617488
+Disk Date = 3622702660
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
+Window Z-Order = 3
+Source Window State = "1,267,267,267,37,38,37,0,0,80,0,263,0,330,0,15,281,0,288,39,299,688,1,22,"
+
+[File 0002]
+Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.uir"
+File Type = "User Interface Resource"
+Disk Date = 3622702660
+In Projects = ""
+Window Top = 32
+Window Left = 10
+Window Height = 263
+Window Width = 528
 Window Z-Order = 1
-Source Window State = "1,163,164,164,119,122,122,0,0,138,0,0,0,1,0,24,48,0,57,56,407,688,1,22,"
 
 [File 0003]
-Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.h"
-File Type = "Include"
-Disk Date = 3622617170
-In Projects = "1,"
-Window Top = 152
-Window Left = 74
-Window Z-Order = 3
-Source Window State = "1,190,190,190,0,113,113,0,0,80,0,0,0,0,0,15,133,0,180,37,299,688,1,0,"
-
-[File 0004]
-Path = "/d/GitHubRepository/CVI-DL212-Utility/user.h"
-File Type = "Include"
-Disk Date = 3622097924
-In Projects = "1,"
-Window Top = 62
-Window Left = 26
-Window Z-Order = 5
-Source Window State = "1,15,15,15,19,23,23,0,0,80,0,10,0,10,0,15,2,0,12,0,299,688,1,0,"
-
-[File 0005]
-Path = "/d/GitHubRepository/CVI-DL212-Utility/user.c"
+Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.c"
 File Type = "CSource"
-Disk Date = 3622097278
+Disk Date = 3622697578
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
 Window Z-Order = 4
-Source Window State = "1,5,5,5,4,6,6,0,3,80,0,62,0,62,0,15,0,0,5,4,299,688,1,0,"
+Source Window State = "1,14,16,14,4,78,4,0,0,80,0,0,0,1,0,21,0,0,18,47,407,688,1,22,"
+
+[File 0004]
+Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.h"
+File Type = "Include"
+Disk Date = 3622702660
+In Projects = "1,"
+Window Top = 152
+Window Left = 74
+Window Z-Order = 2
+Source Window State = "1,18,18,18,9,18,18,0,3,80,0,0,0,0,0,15,9,0,18,9,299,688,1,0,"
+
+[File 0005]
+Path = "/d/GitHubRepository/CVI-DL212-Utility/user.h"
+File Type = "Include"
+Disk Date = 3622698308
+In Projects = "1,"
+Window Top = 62
+Window Left = 26
+Window Z-Order = 5
+Source Window State = "1,13,13,13,18,19,18,0,0,80,0,10,0,10,0,15,9,0,12,116,299,688,1,0,"
 
 [Tab Order]
 Tab 0001 = "/d/GitHubRepository/CVI-DL212-Utility/user.h"
 Tab 0002 = "/d/GitHubRepository/CVI-DL212-Utility/user.c"
-Tab 0003 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.h"
-Tab 0004 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.uir"
-Tab 0005 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.c"
+Tab 0003 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.uir"
+Tab 0004 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.c"
+Tab 0005 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.h"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
@@ -190,4 +190,7 @@ External Process Path = ""
 Command Line Args = ""
 Working Directory = ""
 Environment Options = ""
+
+[Watch 1]
+Watch Expression = "sDL212_CONFIG"
 

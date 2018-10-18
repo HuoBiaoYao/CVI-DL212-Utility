@@ -1,6 +1,18 @@
-[Set_ATTR_DIMMED]
+[GetDL212Rings]
 Class="Function"
-Prototype="int Set_ATTR_DIMMED(int state);"
+Prototype="int GetDL212Rings();"
+
+[GetDL212Numerices]
+Class="Function"
+Prototype="int GetDL212Numerices();"
+
+[GetDL212Strings]
+Class="Function"
+Prototype="int GetDL212Strings();"
+
+[ATTRDimmed_Ctrl]
+Class="Function"
+Prototype="int ATTRDimmed_Ctrl();"
 
 [COM_Enumerate]
 Class="Function"
