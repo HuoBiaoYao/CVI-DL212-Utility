@@ -1,7 +1,6 @@
 #include "user.h"
 
-unsigned char QuitCtrl=1;
-int PANEL_TB_COM_CTRL_Value;	   
+unsigned char QuitCtrl=1;	  	   
 int panelHandle,TabPanel_0_Handle,TabPanel_1_Handle,TabPanel_2_Handle;
 
 int main (int argc, char *argv[]){
@@ -19,7 +18,10 @@ int main (int argc, char *argv[]){
 	//RecallPanelState (panelHandle, "panel_state", 0);				 			  
 	COM_Enumerate();
   	GetCtrlVal (panelHandle, PANEL_RING_COM,&sCOM.number);  
-			    
+	GetDL212Rings();
+	GetDL212Numerices();
+	GetDL212Strings();
+	ATTRDimmed_Ctrl();		    
 	SetSleepPolicy (VAL_SLEEP_MORE);   
     //RunUserInterface ();
 	while(QuitCtrl){
@@ -29,48 +31,50 @@ int main (int argc, char *argv[]){
 	return 0;
 }
    
-int CVICALLBACK ComSelect_CB (int panel, int control, int event,
-							 void *callbackData, int eventData1, int eventData2){
+int CVICALLBACK ComSelect_CB (int panel, int control, int event,void *callbackData, int eventData1, int eventData2){
 	switch (event){
 		case EVENT_LEFT_CLICK:
-			COM_Enumerate();
-			SetCtrlVal (panelHandle, PANEL_RING_COM, sCOM.number);
+			GetCtrlVal (panelHandle, PANEL_RING_COM,&sCOM.number);
+			COM_Enumerate();    
+	   		SetCtrlVal (panelHandle, PANEL_RING_COM,sCOM.number);         
 			break;
 		case EVENT_COMMIT:
-			ComWrt (sCOM.number, "value display off", 18);  
-			//Set_ATTR_DIMMED(1);								   
-			SetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, 0);
-			CloseCom (sCOM.number);
-			PANEL_TB_COM_CTRL_Value = 0;
-			SetCtrlVal (panelHandle, PANEL_TB_COM_CTRL,PANEL_TB_COM_CTRL_Value);
-			sCOM.status = -1;
-			GetCtrlVal (panelHandle, PANEL_RING_COM, &sCOM.number);
+			GetCtrlVal (panelHandle, PANEL_RING_COM, &sCOM.number);  
 			break;
+		case EVENT_VAL_CHANGED:
+			if(OPEN == sCOM.status){
+	  			ComWrt (sCOM.number, "value display off", 18);
+				CloseCom (sCOM.number);
+				sCOM.status = CLOSE;
+			}    
+			SetCtrlVal (panelHandle, PANEL_TB_COM_CTRL,sCOM.status);
+			GetCtrlVal (panelHandle, PANEL_RING_COM, &sCOM.number);   
+		break;
+		default:
+		break;
 	}
 	return 0;
 }
 
 int  CVICALLBACK ComCtrl_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
+	int res;
+	
 	switch (event){
 		case EVENT_COMMIT:  
-			GetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, &PANEL_TB_COM_CTRL_Value); 
-	        if(0 == PANEL_TB_COM_CTRL_Value){
-				ComWrt (sCOM.number, "value display off", 18);  
-				//Set_ATTR_DIMMED(1);								   
-				//SetCtrlVal (panelHandle, PANEL_TOGGLEBUTTON, 0);
-				CloseCom (sCOM.number);
-				sCOM.status = -1;
+			GetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, &sCOM.status); 
+	        if(CLOSE == sCOM.status){
+				ComWrt (sCOM.number, "value display off", 18);      
+				CloseCom (sCOM.number); 
 			}
 			else{	
-				sCOM.status = OpenComConfig (sCOM.number, "", 115200, 0, 8, 1, 1024, 1024); 
-				if(sCOM.status < 0){
+				res = OpenComConfig (sCOM.number, "", 115200, 0, 8, 1, 1024, 1024); 
+				if(res < 0){
 					SetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, 0);
 				    MessagePopup ("","     串口打开失败,请检查该串口是否已经被其他程序打开     ");         
 				}
 				else{
 					SetComTime(sCOM.number,2);
-					FlushOutQ (sCOM.number);
-				    //Set_ATTR_DIMMED(0);      
+					FlushOutQ (sCOM.number);     
 				}	  
 			}  
 			break;
@@ -79,13 +83,10 @@ int  CVICALLBACK ComCtrl_CB(int panel, int control, int event, void *callbackDat
 }
  
 int  CVICALLBACK MainPanel_CB(int panel, int event, void *callbackData, int eventData1, int eventData2){
-	switch (event)
-	{
+	switch (event){
 		case EVENT_GOT_FOCUS:
-
 			break;
 		case EVENT_LOST_FOCUS:
-
 			break;
 		case EVENT_CLOSE:	
 			SavePanelState (panelHandle, "panel_state", 0);
@@ -98,7 +99,10 @@ int  CVICALLBACK MainPanel_CB(int panel, int event, void *callbackData, int even
 
 
 int  CVICALLBACK NumericesSet_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
-	switch (event){       
+	switch (event){    
+		case EVENT_LEFT_CLICK:
+		case EVENT_RIGHT_CLICK:
+		case EVENT_COMMIT:     	
 		case EVENT_VAL_CHANGED:
 			GetDL212Numerices(); 
 		break;
@@ -132,7 +136,12 @@ int  CVICALLBACK StringsSet_CB(int panel, int control, int event, void *callback
 }
 
 int  CVICALLBACK Sdi12CmdSet_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
-	
+	switch(event){
+	    case EVENT_VAL_CHANGED:
+			GetCtrlVal(panelHandle,PANEL_STRING_DEVICEID,(char*)&sDL212_CONFIG.device_id); 
+		break;
+		
+	}
 	return 0;
 }
  
@@ -148,11 +157,9 @@ int  CVICALLBACK Timer_CB(int panel, int control, int event, void *callbackData,
 			CVIAbsoluteTimeToLocalCalendar(absTime, &year, &month, &day, &hour, &min, &sec, 0, &weekDay);			    
 			sprintf(buffer, "%04d/%02d/%02d/%s %02d:%02d:%02d", year,month,day,DaysOfWeek[weekDay],hour,min,sec);   
 			SetCtrlVal(panel, PANEL_TEXTMSG_CLOCK_PC, buffer); 
-			
-			//GetConfig();
+			GetCtrlVal(panelHandle,PANEL_RING_COM ,&sCOM.number);  
 			//SavePanelState (panelHandle, "panel_state", 0);
 			break;
 	}
 	return 0;
 }	
- 

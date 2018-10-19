@@ -29,14 +29,24 @@ HDRS = 	"d:\\GitHubRepository\\CVI-DL212-Utility"
 	"c:\\ProgramData\\National Instruments\\CVI2017\\bin"
 	"c:\\Program Files\\National Instruments\\Shared\\CVI\\Bin"
 	;
+include Jamfile_instr ;
 LOCATE on "DL212 Utility.c" = "d:\\GitHubRepository\\CVI-DL212-Utility" ;
 LOCATE on "DL212 Utility.h" = "d:\\GitHubRepository\\CVI-DL212-Utility" ;
 LOCATE on "user.c" = "d:\\GitHubRepository\\CVI-DL212-Utility" ;
 LOCATE on "user.h" = "d:\\GitHubRepository\\CVI-DL212-Utility" ;
+Object "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\DL212 Utility.obj" : "d:\\GitHubRepository\\CVI-DL212-Utility\\DL212 Utility.c" ;
+FILENUM on "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\DL212 Utility.obj" = 1 ;
+DEFPROTS on "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\DL212 Utility.obj" = "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\DL212 Utility.obj.cvidefprots" ;
+OUTFILE on "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\DL212 Utility.obj" = "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\DL212 Utility.obj.out" ;
+PrjObjects += "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\DL212 Utility.obj" ;
 Object "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\user.obj" : "d:\\GitHubRepository\\CVI-DL212-Utility\\user.c" ;
-FILENUM on "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\user.obj" = 1 ;
+FILENUM on "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\user.obj" = 2 ;
 DEFPROTS on "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\user.obj" = "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\user.obj.cvidefprots" ;
 OUTFILE on "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\user.obj" = "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\user.obj.out" ;
 PrjObjects += "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\user.obj" ;
-Always $(PrjObjects) ;
-Depends all : $(PrjObjects) ;
+Object "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\resources.res" : "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\resources.in.rc" ;
+Depends "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\resources.res" : "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\manifest.xml" ;
+MainFromObjects "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\DL212 Utility.exe" : $(PrjObjects) $(InstrObjects) ;
+Depends "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\DL212 Utility.exe" : "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\link_options.txt" ;
+Depends "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\DL212 Utility.exe" : "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\resources.res" ;
+Depends all : "d:\\GitHubRepository\\CVI-DL212-Utility\\cvibuild.DL212 Utility\\Debug\\DL212 Utility.exe" ;

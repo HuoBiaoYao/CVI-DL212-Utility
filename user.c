@@ -73,13 +73,13 @@ int GetDL212Numerices(void){
 }
 
 int GetDL212Strings(void){
-	GetCtrlVal(panelHandle,PANEL_STRING_DEVICEID,&sDL212_CONFIG.device_id);
-	GetCtrlVal(TabPanel_1_Handle,TABPANEL_2_STRING_S0_D1,&sDL212_CONFIG.s0[0]);  
-	GetCtrlVal(TabPanel_1_Handle,TABPANEL_2_STRING_S0_D2,&sDL212_CONFIG.s0[1]);
-	GetCtrlVal(TabPanel_1_Handle,TABPANEL_2_STRING_S1_D1,&sDL212_CONFIG.s1[0]);
-	GetCtrlVal(TabPanel_1_Handle,TABPANEL_2_STRING_S1_D2,&sDL212_CONFIG.s1[1]);
-	GetCtrlVal(TabPanel_1_Handle,TABPANEL_2_STRING_S2_D1,&sDL212_CONFIG.s2[0]);
-	GetCtrlVal(TabPanel_1_Handle,TABPANEL_2_STRING_S2_D2,&sDL212_CONFIG.s2[1]);
+	GetCtrlVal(panelHandle,PANEL_STRING_DEVICEID,(char*)&sDL212_CONFIG.device_id);
+	/*GetCtrlVal(TabPanel_1_Handle,TABPANEL_2_STRING_S0_D1,(char*)&sDL212_CONFIG.s0[0]);  
+	GetCtrlVal(TabPanel_1_Handle,TABPANEL_2_STRING_S0_D2,(char*)&sDL212_CONFIG.s0[1]);
+	GetCtrlVal(TabPanel_1_Handle,TABPANEL_2_STRING_S1_D1,(char*)&sDL212_CONFIG.s1[0]);
+	GetCtrlVal(TabPanel_1_Handle,TABPANEL_2_STRING_S1_D2,(char*)&sDL212_CONFIG.s1[1]);
+	GetCtrlVal(TabPanel_1_Handle,TABPANEL_2_STRING_S2_D1,(char*)&sDL212_CONFIG.s2[0]);
+	GetCtrlVal(TabPanel_1_Handle,TABPANEL_2_STRING_S2_D2,(char*)&sDL212_CONFIG.s2[1]);*/
 	//GetCtrlVal(TabPanel_1_Handle, ,&sDL212_CONFIG.sdi12_cmd[0]);
 	//GetCtrlVal(TabPanel_1_Handle, ,&sDL212_CONFIG.sdi12_cmd[1]); 
   	return 0;	
@@ -107,7 +107,7 @@ int ATTRDimmed_Ctrl(void){
 			SetCtrlAttribute(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_1H ,ATTR_DIMMED,0); 
 		}
 	}
-	if(VOLT_DIFF == sDL212_CONFIG.mode[0]){
+	if(MODE_VOLT_DIFF == sDL212_CONFIG.mode[0]){
 		SetCtrlAttribute(TabPanel_1_Handle,TABPANEL_1_RING_VX_SW_1L ,ATTR_DIMMED,1);
 		SetCtrlAttribute(TabPanel_1_Handle,TABPANEL_1_RING_SW_1L ,ATTR_DIMMED,1); 
 		SetCtrlAttribute(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_1L ,ATTR_DIMMED,1); 
@@ -164,7 +164,7 @@ int ATTRDimmed_Ctrl(void){
 			SetCtrlAttribute(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_2H ,ATTR_DIMMED,0); 
 		}
 	}
-	if(VOLT_DIFF == sDL212_CONFIG.mode[1]){
+	if(MODE_VOLT_DIFF == sDL212_CONFIG.mode[1]){
 		SetCtrlAttribute(TabPanel_1_Handle,TABPANEL_1_RING_VX_SW_2L ,ATTR_DIMMED,1);
 		SetCtrlAttribute(TabPanel_1_Handle,TABPANEL_1_RING_SW_2L ,ATTR_DIMMED,1); 
 		SetCtrlAttribute(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_2L ,ATTR_DIMMED,1); 
@@ -221,7 +221,7 @@ int ATTRDimmed_Ctrl(void){
 			SetCtrlAttribute(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_3H ,ATTR_DIMMED,0); 
 		}
 	}
-	if(VOLT_DIFF == sDL212_CONFIG.mode[2]){
+	if(MODE_VOLT_DIFF == sDL212_CONFIG.mode[2]){
 		SetCtrlAttribute(TabPanel_1_Handle,TABPANEL_1_RING_VX_SW_3L ,ATTR_DIMMED,1);
 		SetCtrlAttribute(TabPanel_1_Handle,TABPANEL_1_RING_SW_3L ,ATTR_DIMMED,1); 
 		SetCtrlAttribute(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_3L ,ATTR_DIMMED,1); 
@@ -256,41 +256,127 @@ int ATTRDimmed_Ctrl(void){
 				SetCtrlAttribute(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_3L ,ATTR_DIMMED,0); 
 			}
 		}  
-	}
-	//SW12通道
-	if(VOLT_DIFF == sDL212_CONFIG.sw[6]){     
-		
-	}
-	else{
-	
-	}
+	} 
 	//PSW通道
-	if(VOLT_DIFF == sDL212_CONFIG.sw[7]){     
-		
+	if(CLOSE == sDL212_CONFIG.sw[7]){     
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_PSW ,ATTR_DIMMED,1);	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_PSW ,ATTR_DIMMED,1);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_PSW ,ATTR_DIMMED,1);
 	}
 	else{
-	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_PSW ,ATTR_DIMMED,0);	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_PSW ,ATTR_DIMMED,0);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_PSW ,ATTR_DIMMED,0);
 	}
 	//PLL通道
-	if(VOLT_DIFF == sDL212_CONFIG.sw[8]){     
-		
+	if(CLOSE == sDL212_CONFIG.sw[8]){     
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_PLL ,ATTR_DIMMED,1);	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_PLL ,ATTR_DIMMED,1);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_PLL ,ATTR_DIMMED,1);	
 	}
 	else{
-	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_PLL ,ATTR_DIMMED,0);	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_PLL ,ATTR_DIMMED,0);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_PLL ,ATTR_DIMMED,0);
 	}
 	//D1通道
-	if(VOLT_DIFF == sDL212_CONFIG.sw[9]){     
-		
+	if(CLOSE == sDL212_CONFIG.sw[9]){     
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_MODE_D1 ,ATTR_DIMMED,1);	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D1 ,ATTR_DIMMED,1);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D1 ,ATTR_DIMMED,1);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D1 ,ATTR_DIMMED,1);        
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S0_D1 ,ATTR_DIMMED,1);     
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S1_D1 ,ATTR_DIMMED,1);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D1 ,ATTR_DIMMED,1);	   
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D1 ,ATTR_DIMMED,1);
 	}
 	else{
-	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_MODE_D1 ,ATTR_DIMMED,0);	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D1 ,ATTR_DIMMED,0);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D1 ,ATTR_DIMMED,0);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D1 ,ATTR_DIMMED,0);	    
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S0_D1 ,ATTR_DIMMED,0);     
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S1_D1 ,ATTR_DIMMED,0);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D1 ,ATTR_DIMMED,0);	   
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D1 ,ATTR_DIMMED,0);
+		if(MODE_SDI12 == sDL212_CONFIG.mode[3]){
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D1 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D1 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D1 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D1 ,ATTR_DIMMED,0); 
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S0_D1 ,ATTR_DIMMED,1);     
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S1_D1 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D1 ,ATTR_DIMMED,1);	
+		}
+		else if(MODE_PULSE == sDL212_CONFIG.mode[3]){
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D1 ,ATTR_DIMMED,0);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D1 ,ATTR_DIMMED,0);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D1 ,ATTR_DIMMED,0);  
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D1 ,ATTR_DIMMED,1); 
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S0_D1 ,ATTR_DIMMED,1);     
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S1_D1 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D1 ,ATTR_DIMMED,1);
+		}
+		else{
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D1 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D1 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D1 ,ATTR_DIMMED,1);  
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D1 ,ATTR_DIMMED,1); 
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S0_D1 ,ATTR_DIMMED,0);     
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S1_D1 ,ATTR_DIMMED,0);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D1 ,ATTR_DIMMED,0);
+		}
+		
 	}
 	//D2通道
-	if(VOLT_DIFF == sDL212_CONFIG.sw[10]){     
-		
+	if(MODE_VOLT_DIFF == sDL212_CONFIG.sw[10]){     
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_MODE_D2 ,ATTR_DIMMED,1);	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D2 ,ATTR_DIMMED,1);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D2 ,ATTR_DIMMED,1);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D2 ,ATTR_DIMMED,1);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D2 ,ATTR_DIMMED,1);    
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S0_D2 ,ATTR_DIMMED,1);     
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S1_D2 ,ATTR_DIMMED,1);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D2 ,ATTR_DIMMED,1);	   
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D2 ,ATTR_DIMMED,1);	
 	}
 	else{
-	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_MODE_D2 ,ATTR_DIMMED,0);	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D2 ,ATTR_DIMMED,0);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D2 ,ATTR_DIMMED,0);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D2 ,ATTR_DIMMED,0);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D2 ,ATTR_DIMMED,0);    
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S0_D2 ,ATTR_DIMMED,0);     
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S1_D2 ,ATTR_DIMMED,0);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D2 ,ATTR_DIMMED,0);	   
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D2 ,ATTR_DIMMED,0);
+		if(MODE_SDI12 == sDL212_CONFIG.mode[4]){
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D2 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D2 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D2 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D2 ,ATTR_DIMMED,0); 
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S0_D2 ,ATTR_DIMMED,1);     
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S1_D2 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D2 ,ATTR_DIMMED,1);	
+		}
+		else if(MODE_PULSE == sDL212_CONFIG.mode[4]){
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D2 ,ATTR_DIMMED,0);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D2 ,ATTR_DIMMED,0);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D2 ,ATTR_DIMMED,0);  
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D2 ,ATTR_DIMMED,1); 
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S0_D2 ,ATTR_DIMMED,1);     
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S1_D2 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D2 ,ATTR_DIMMED,1);
+		}
+		else{
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D2 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D2 ,ATTR_DIMMED,1);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D2 ,ATTR_DIMMED,1);  
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D2 ,ATTR_DIMMED,1); 
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S0_D2 ,ATTR_DIMMED,0);     
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S1_D2 ,ATTR_DIMMED,0);
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D2 ,ATTR_DIMMED,0);
+		}
 	}
 	return 0;
 }

@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 5
+Number of Opened Files = 6
 Window Confinement Region Enabled = True
 MainColumnWidth = 180
 FileDateColumnWidth = 70
@@ -48,17 +48,17 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/user.c"
 File Type = "CSource"
-Disk Date = 3622702660
+Disk Date = 3622769356
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Window Z-Order = 3
-Source Window State = "1,267,267,267,37,38,37,0,0,80,0,263,0,330,0,15,281,0,288,39,299,688,1,22,"
+Window Z-Order = 4
+Source Window State = "1,75,75,75,57,70,57,0,0,80,0,352,0,416,0,15,67,0,75,65,299,688,1,22,"
 
 [File 0002]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.uir"
 File Type = "User Interface Resource"
-Disk Date = 3622702660
+Disk Date = 3622789398
 In Projects = ""
 Window Top = 32
 Window Left = 10
@@ -69,39 +69,52 @@ Window Z-Order = 1
 [File 0003]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.c"
 File Type = "CSource"
-Disk Date = 3622697578
+Disk Date = 3622783572
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Window Z-Order = 4
-Source Window State = "1,14,16,14,4,78,4,0,0,80,0,0,0,1,0,21,0,0,18,47,407,688,1,22,"
+Window Z-Order = 3
+Source Window State = "1,35,35,35,8,30,8,0,0,80,0,0,0,1,0,21,93,0,106,12,407,688,1,22,"
+Breakpoint 0001 = "107,0,enabled,"
+Tracepoint 0001 = "0,0,108,1,"
 
 [File 0004]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.h"
 File Type = "Include"
-Disk Date = 3622702660
+Disk Date = 3622789398
 In Projects = "1,"
 Window Top = 152
 Window Left = 74
 Window Z-Order = 2
-Source Window State = "1,18,18,18,9,18,18,0,3,80,0,0,0,0,0,15,9,0,18,9,299,688,1,0,"
+Source Window State = "1,18,18,18,9,18,18,0,3,80,0,0,0,0,0,15,15,0,18,9,299,688,1,0,"
 
 [File 0005]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/user.h"
 File Type = "Include"
-Disk Date = 3622698308
+Disk Date = 3622768782
 In Projects = "1,"
 Window Top = 62
 Window Left = 26
+Window Z-Order = 6
+Source Window State = "1,15,15,15,8,12,12,0,3,80,0,10,0,10,0,15,0,0,15,8,299,688,1,0,"
+
+[File 0006]
+Path = "/c/Program Files/National Instruments/CVI2017/include/userint.h"
+File Type = "Include"
+Disk Date = 3573565200
+In Projects = ""
+Window Top = 92
+Window Left = 42
 Window Z-Order = 5
-Source Window State = "1,13,13,13,18,19,18,0,0,80,0,10,0,10,0,15,9,0,12,116,299,688,1,0,"
+Source Window State = "1,2173,2173,2173,14,29,29,0,3,80,0,0,0,0,0,15,2167,0,2173,14,299,688,1,0,"
 
 [Tab Order]
 Tab 0001 = "/d/GitHubRepository/CVI-DL212-Utility/user.h"
 Tab 0002 = "/d/GitHubRepository/CVI-DL212-Utility/user.c"
 Tab 0003 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.uir"
 Tab 0004 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.c"
-Tab 0005 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.h"
+Tab 0005 = "/c/Program Files/National Instruments/CVI2017/include/userint.h"
+Tab 0006 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.h"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

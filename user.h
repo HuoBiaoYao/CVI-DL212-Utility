@@ -11,11 +11,16 @@
 
 #define errChk    
 
-#define CLOSE     0
-#define OPER      1
 
-#define VOLT_DIFF 0
-#define VOLT_SE   1 
+#define CLOSE          0
+#define OPEN           1
+
+#define MODE_VOLT_DIFF 0
+#define MODE_VOLT_SE   1 
+
+#define MODE_SDI12     0
+#define MODE_PULSE	   1
+#define MODE_COM	   2
 
 struct _COM{
   unsigned char number;
@@ -23,7 +28,7 @@ struct _COM{
 };
 
 struct _DL212_CONFIG{
-  char device_id[2];
+  char device_id[3];//包含结束符
   unsigned int scan;
   unsigned char mode[5];//差分1，差分2，差分3，DI，D2
   unsigned char sw[11];
@@ -33,9 +38,9 @@ struct _DL212_CONFIG{
   float mul[10];
   float offset[10];
   unsigned char datatype[4];//周期，频率，计数
-  char s0[2];//分隔符
-  char s1[2];//起始符
-  char s2[2];//终止符
+  char s0[3];//分隔符//包含结束符    
+  char s1[3];//起始符//包含结束符    
+  char s2[3];//终止符//包含结束符    
   char sdi12_cmd[2][400];
 };
 
