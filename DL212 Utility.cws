@@ -46,16 +46,6 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/d/GitHubRepository/CVI-DL212-Utility/user.c"
-File Type = "CSource"
-Disk Date = 3622769356
-In Projects = "1,"
-Window Top = 32
-Window Left = 10
-Window Z-Order = 4
-Source Window State = "1,75,75,75,57,70,57,0,0,80,0,352,0,416,0,15,67,0,75,65,299,688,1,22,"
-
-[File 0002]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.uir"
 File Type = "User Interface Resource"
 Disk Date = 3622789398
@@ -65,6 +55,16 @@ Window Left = 10
 Window Height = 263
 Window Width = 528
 Window Z-Order = 1
+
+[File 0002]
+Path = "/d/GitHubRepository/CVI-DL212-Utility/user.c"
+File Type = "CSource"
+Disk Date = 3622769356
+In Projects = "1,"
+Window Top = 32
+Window Left = 10
+Window Z-Order = 4
+Source Window State = "1,75,75,75,57,70,57,0,0,80,0,352,0,416,0,15,67,0,75,65,299,688,1,22,"
 
 [File 0003]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.c"
