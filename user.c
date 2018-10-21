@@ -4,6 +4,10 @@
 struct _COM sCOM;
 struct _DL212_CONFIG sDL212_CONFIG;			 
 
+int SetPanelValuesFromFile(void){
+
+}
+
 int GetDL212Rings(void){ 
  	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_MODE_HL1,&sDL212_CONFIG.mode[0]);
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_MODE_HL2,&sDL212_CONFIG.mode[1]);

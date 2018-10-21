@@ -41,13 +41,15 @@ struct _DL212_CONFIG{
   char s0[3];//分隔符//包含结束符    
   char s1[3];//起始符//包含结束符    
   char s2[3];//终止符//包含结束符    
-  char sdi12_cmd[2][400];
+  char sdi12_cmd[2][200];
+  unsigned char lrc;
 };
 
 extern struct _COM sCOM; 
 struct _DL212_CONFIG sDL212_CONFIG;	
 extern int panelHandle,TabPanel_0_Handle,TabPanel_1_Handle,TabPanel_2_Handle;  
 
+int SetPanelValuesFromFile(void);
 int GetDL212Rings(void);
 int GetDL212Numerices(void);
 int GetDL212Strings(void);

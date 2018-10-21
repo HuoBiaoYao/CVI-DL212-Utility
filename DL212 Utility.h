@@ -23,10 +23,11 @@
 #define  PANEL_TIMER                      8       /* control type: timer, callback function: Timer_CB */
 #define  PANEL_TEXTMSG_CLOCK_PC           9       /* control type: textMsg, callback function: (none) */
 #define  PANEL_TEXTMSG                    10      /* control type: textMsg, callback function: (none) */
+#define  PANEL_TEXTMSG_2                  11      /* control type: textMsg, callback function: (none) */
 
      /* tab page panel controls */
-#define  TABPANEL_0_TEXTBOX_2             2       /* control type: textBox, callback function: (none) */
-#define  TABPANEL_0_TEXTBOX               3       /* control type: textBox, callback function: (none) */
+#define  TABPANEL_0_TEXTBOX_T             2       /* control type: textBox, callback function: (none) */
+#define  TABPANEL_0_TEXTBOX_R             3       /* control type: textBox, callback function: (none) */
 #define  TABPANEL_0_RING                  4       /* control type: ring, callback function: (none) */
 #define  TABPANEL_0_PICTURE               5       /* control type: picture, callback function: (none) */
 
@@ -135,21 +136,31 @@
 
 #define  MENUBAR                          1
 #define  MENUBAR_MENU1                    2
-#define  MENUBAR_MENU1_ITEM1_3            3
-#define  MENUBAR_MENU1_ITEM2_3            4
-#define  MENUBAR_MENU1_ITEM3              5
-#define  MENUBAR_MENU1_2                  6
-#define  MENUBAR_MENU1_2_ITEM1            7       /* callback function: SendConfig_CB */
-#define  MENUBAR_MENU1_2_ITEM2            8       /* callback function: ReadConfig_CB */
-#define  MENUBAR_MENU2                    9
-#define  MENUBAR_MENU2_ITEM1_2            10
-#define  MENUBAR_MENU2_ITEM2_2            11
+#define  MENUBAR_MENU1_FILE_OPEN          3       /* callback function: FileOpen_CB */
+#define  MENUBAR_MENU1_FILE_SAVE          4       /* callback function: FileSave_CB */
+#define  MENUBAR_MENU1_FILE_SAVEAS        5       /* callback function: File_SaveAs */
+#define  MENUBAR_MENU1_FILE_CLOSE         6       /* callback function: FileClose */
+#define  MENUBAR_MENU1_SEPARATOR          7
+#define  MENUBAR_MENU1_SEPARATOR_2        8
+#define  MENUBAR_MENU1_EXIT               9       /* callback function: Exit */
+#define  MENUBAR_MENU1_2                  10
+#define  MENUBAR_MENU1_2_SEND_CONFIG      11      /* callback function: SendConfig_CB */
+#define  MENUBAR_MENU1_2_ITEM2            12      /* callback function: ReadConfig_CB */
+#define  MENUBAR_HELP                     13      /* callback function: Help_CB */
+#define  MENUBAR_HELP_ABOUT               14      /* callback function: About_CB */
 
 
      /* Callback Prototypes: */
 
+void CVICALLBACK About_CB(int menubar, int menuItem, void *callbackData, int panel);
 int  CVICALLBACK ComCtrl_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK ComSelect_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+void CVICALLBACK Exit(int menubar, int menuItem, void *callbackData, int panel);
+void CVICALLBACK File_SaveAs(int menubar, int menuItem, void *callbackData, int panel);
+void CVICALLBACK FileClose(int menubar, int menuItem, void *callbackData, int panel);
+void CVICALLBACK FileOpen_CB(int menubar, int menuItem, void *callbackData, int panel);
+void CVICALLBACK FileSave_CB(int menubar, int menuItem, void *callbackData, int panel);
+void CVICALLBACK Help_CB(int menubar, int menuItem, void *callbackData, int panel);
 int  CVICALLBACK MainPanel_CB(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK NumericesSet_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 void CVICALLBACK ReadConfig_CB(int menubar, int menuItem, void *callbackData, int panel);
