@@ -125,6 +125,10 @@
 #define  TABPANEL_2_DECORATION_3          36      /* control type: deco, callback function: (none) */
 #define  TABPANEL_2_DECORATION_4          37      /* control type: deco, callback function: (none) */
 #define  TABPANEL_2_DECORATION_5          38      /* control type: deco, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MEATIME_PLL   39      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MEATIME_PSW   40      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MEATIME_D2    41      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MEATIME_D1    42      /* control type: numeric, callback function: (none) */
 
 
      /* Control Arrays: */

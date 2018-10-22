@@ -5,7 +5,7 @@ struct _COM sCOM;
 struct _DL212_CONFIG sDL212_CONFIG;			 
 
 int SetPanelValuesFromFile(void){
-
+  return 0;
 }
 
 int GetDL212Rings(void){ 
@@ -52,13 +52,17 @@ int GetDL212Numerices(void){
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_2H ,&sDL212_CONFIG.vx_value[2]);
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_2L ,&sDL212_CONFIG.vx_value[3]);
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_3H ,&sDL212_CONFIG.vx_value[4]);
-	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_3L ,&sDL212_CONFIG.vx_value[5]);
+	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_3L ,&sDL212_CONFIG.vx_value[5]);		    
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_MUL_1H ,&sDL212_CONFIG.mul[0]);
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_MUL_1L ,&sDL212_CONFIG.mul[1]);
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_MUL_2H ,&sDL212_CONFIG.mul[2]); 
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_MUL_2L ,&sDL212_CONFIG.mul[3]); 
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_MUL_3H ,&sDL212_CONFIG.mul[4]); 
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_MUL_3L ,&sDL212_CONFIG.mul[5]); 
+	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_PSW ,&sDL212_CONFIG.mea_time[0]);                 	
+	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_PLL ,&sDL212_CONFIG.mea_time[1]); 
+	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D1 ,&sDL212_CONFIG.mea_time[2]); 
+	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D2 ,&sDL212_CONFIG.mea_time[3]); 
 	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_PSW  ,&sDL212_CONFIG.mul[6]); 
 	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_PLL ,&sDL212_CONFIG.mul[7]); 
 	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D1 ,&sDL212_CONFIG.mul[8]); 
@@ -262,23 +266,27 @@ int ATTRDimmed_Ctrl(void){
 		}  
 	} 
 	//PSW通道
-	if(CLOSE == sDL212_CONFIG.sw[7]){     
-		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_PSW ,ATTR_DIMMED,1);	
+	if(CLOSE == sDL212_CONFIG.sw[7]){    
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_PSW ,ATTR_DIMMED,1);                
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_PSW ,ATTR_DIMMED,1);    
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_PSW ,ATTR_DIMMED,1);
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_PSW ,ATTR_DIMMED,1);
 	}
 	else{
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_PSW ,ATTR_DIMMED,0);       
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_PSW ,ATTR_DIMMED,0);	
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_PSW ,ATTR_DIMMED,0);
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_PSW ,ATTR_DIMMED,0);
 	}
 	//PLL通道
-	if(CLOSE == sDL212_CONFIG.sw[8]){     
+	if(CLOSE == sDL212_CONFIG.sw[8]){ 
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_PLL ,ATTR_DIMMED,1);       
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_PLL ,ATTR_DIMMED,1);	
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_PLL ,ATTR_DIMMED,1);
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_PLL ,ATTR_DIMMED,1);	
 	}
 	else{
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_PLL ,ATTR_DIMMED,0);       
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_PLL ,ATTR_DIMMED,0);	
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_PLL ,ATTR_DIMMED,0);
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_PLL ,ATTR_DIMMED,0);
@@ -286,6 +294,7 @@ int ATTRDimmed_Ctrl(void){
 	//D1通道
 	if(CLOSE == sDL212_CONFIG.sw[9]){     
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_MODE_D1 ,ATTR_DIMMED,1);	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D1 ,ATTR_DIMMED,1);       
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D1 ,ATTR_DIMMED,1);
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D1 ,ATTR_DIMMED,1);
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D1 ,ATTR_DIMMED,1);        
@@ -295,7 +304,8 @@ int ATTRDimmed_Ctrl(void){
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D1 ,ATTR_DIMMED,1);
 	}
 	else{
-		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_MODE_D1 ,ATTR_DIMMED,0);	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_MODE_D1 ,ATTR_DIMMED,0);
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D1 ,ATTR_DIMMED,1);       
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D1 ,ATTR_DIMMED,0);
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D1 ,ATTR_DIMMED,0);
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D1 ,ATTR_DIMMED,0);	    
@@ -304,6 +314,7 @@ int ATTRDimmed_Ctrl(void){
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D1 ,ATTR_DIMMED,0);	   
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D1 ,ATTR_DIMMED,0);
 		if(MODE_SDI12 == sDL212_CONFIG.mode[3]){
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D1 ,ATTR_DIMMED,1);       
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D1 ,ATTR_DIMMED,1);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D1 ,ATTR_DIMMED,1);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D1 ,ATTR_DIMMED,1);
@@ -313,6 +324,7 @@ int ATTRDimmed_Ctrl(void){
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D1 ,ATTR_DIMMED,1);	
 		}
 		else if(MODE_PULSE == sDL212_CONFIG.mode[3]){
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D1 ,ATTR_DIMMED,0);       
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D1 ,ATTR_DIMMED,0);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D1 ,ATTR_DIMMED,0);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D1 ,ATTR_DIMMED,0);  
@@ -322,6 +334,7 @@ int ATTRDimmed_Ctrl(void){
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D1 ,ATTR_DIMMED,1);
 		}
 		else{
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D1 ,ATTR_DIMMED,1);       
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D1 ,ATTR_DIMMED,1);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D1 ,ATTR_DIMMED,1);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D1 ,ATTR_DIMMED,1);  
@@ -335,6 +348,7 @@ int ATTRDimmed_Ctrl(void){
 	//D2通道
 	if(MODE_VOLT_DIFF == sDL212_CONFIG.sw[10]){     
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_MODE_D2 ,ATTR_DIMMED,1);	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D2 ,ATTR_DIMMED,1);      
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D2 ,ATTR_DIMMED,1);
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D2 ,ATTR_DIMMED,1);
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D2 ,ATTR_DIMMED,1);
@@ -346,6 +360,7 @@ int ATTRDimmed_Ctrl(void){
 	}
 	else{
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_MODE_D2 ,ATTR_DIMMED,0);	
+		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D2 ,ATTR_DIMMED,0);
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D2 ,ATTR_DIMMED,0);
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D2 ,ATTR_DIMMED,0);
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D2 ,ATTR_DIMMED,0);
@@ -355,6 +370,7 @@ int ATTRDimmed_Ctrl(void){
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D2 ,ATTR_DIMMED,0);	   
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D2 ,ATTR_DIMMED,0);
 		if(MODE_SDI12 == sDL212_CONFIG.mode[4]){
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D2 ,ATTR_DIMMED,1);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D2 ,ATTR_DIMMED,1);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D2 ,ATTR_DIMMED,1);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D2 ,ATTR_DIMMED,1);
@@ -364,6 +380,7 @@ int ATTRDimmed_Ctrl(void){
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D2 ,ATTR_DIMMED,1);	
 		}
 		else if(MODE_PULSE == sDL212_CONFIG.mode[4]){
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D2 ,ATTR_DIMMED,0);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D2 ,ATTR_DIMMED,0);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D2 ,ATTR_DIMMED,0);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D2 ,ATTR_DIMMED,0);  
@@ -373,6 +390,7 @@ int ATTRDimmed_Ctrl(void){
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D2 ,ATTR_DIMMED,1);
 		}
 		else{
+			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D2 ,ATTR_DIMMED,1);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D2 ,ATTR_DIMMED,1);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D2 ,ATTR_DIMMED,1);
 			SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D2 ,ATTR_DIMMED,1);  

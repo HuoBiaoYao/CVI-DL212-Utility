@@ -35,6 +35,7 @@ struct _DL212_CONFIG{
   unsigned char rang[6];
   unsigned char vx_sw[6];
   float vx_value[6];
+  unsigned int mea_time[4];
   float mul[10];
   float offset[10];
   unsigned char datatype[4];//周期，频率，计数
