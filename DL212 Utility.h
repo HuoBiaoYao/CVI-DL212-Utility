@@ -28,7 +28,7 @@
      /* tab page panel controls */
 #define  TABPANEL_0_TEXTBOX_T             2       /* control type: textBox, callback function: (none) */
 #define  TABPANEL_0_TEXTBOX_R             3       /* control type: textBox, callback function: (none) */
-#define  TABPANEL_0_RING                  4       /* control type: ring, callback function: (none) */
+#define  TABPANEL_0_RING_DEBUG_MODE       4       /* control type: ring, callback function: (none) */
 #define  TABPANEL_0_PICTURE               5       /* control type: picture, callback function: (none) */
 
      /* tab page panel controls */
@@ -125,10 +125,10 @@
 #define  TABPANEL_2_DECORATION_3          36      /* control type: deco, callback function: (none) */
 #define  TABPANEL_2_DECORATION_4          37      /* control type: deco, callback function: (none) */
 #define  TABPANEL_2_DECORATION_5          38      /* control type: deco, callback function: (none) */
-#define  TABPANEL_2_NUMERIC_MEATIME_PLL   39      /* control type: numeric, callback function: (none) */
-#define  TABPANEL_2_NUMERIC_MEATIME_PSW   40      /* control type: numeric, callback function: (none) */
-#define  TABPANEL_2_NUMERIC_MEATIME_D2    41      /* control type: numeric, callback function: (none) */
-#define  TABPANEL_2_NUMERIC_MEATIME_D1    42      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MEATIME_PLL   39      /* control type: numeric, callback function: NumericesSet_CB */
+#define  TABPANEL_2_NUMERIC_MEATIME_PSW   40      /* control type: numeric, callback function: NumericesSet_CB */
+#define  TABPANEL_2_NUMERIC_MEATIME_D1    41      /* control type: numeric, callback function: NumericesSet_CB */
+#define  TABPANEL_2_NUMERIC_MEATIME_D2    42      /* control type: numeric, callback function: NumericesSet_CB */
 
 
      /* Control Arrays: */
