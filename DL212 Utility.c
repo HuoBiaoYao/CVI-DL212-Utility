@@ -72,10 +72,14 @@ int  CVICALLBACK ComCtrl_CB(int panel, int control, int event, void *callbackDat
 		case EVENT_COMMIT:  
 			GetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, &sCOM.status); 
 	        if(CLOSE == sCOM.status){
-				ComWrt (sCOM.number, "value display off", 18);      
+				SetCtrlAttribute(panelHandle,PANEL_RING_COM ,ATTR_DIMMED,0);
+				SetCtrlAttribute(TabPanel_0_Handle,TABPANEL_0_RING_DEBUG_MODE ,ATTR_DIMMED,1);   
+				ComWrt (sCOM.number, "DL212 value display off", 23);      
 				CloseCom (sCOM.number); 
 			}
 			else{	
+				SetCtrlAttribute(panelHandle,PANEL_RING_COM ,ATTR_DIMMED,1); 
+				SetCtrlAttribute(TabPanel_0_Handle,TABPANEL_0_RING_DEBUG_MODE ,ATTR_DIMMED,0);    
 				res = OpenComConfig (sCOM.number, "", 115200, 0, 8, 1, 1024, 1024); 
 				if(res < 0){
 					SetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, 0);
@@ -109,8 +113,6 @@ int  CVICALLBACK MainPanel_CB(int panel, int event, void *callbackData, int even
 
 int  CVICALLBACK NumericesSet_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
 	switch (event){    
-		case EVENT_LEFT_CLICK:
-		case EVENT_RIGHT_CLICK:
 		case EVENT_COMMIT:     	
 		case EVENT_VAL_CHANGED:
 			GetDL212Numerices(); 
@@ -195,7 +197,9 @@ void CVICALLBACK SendConfig_CB(int menubar, int menuItem, void *callbackData, in
 			len = ComWrt (sCOM.number,(const char*)(p+j*60),60); 
 			SyncWait (Timer(),0.02);
 		} 
-		memset(RxBuf,0,10);
+		len = ComWrt (sCOM.number,(const char*)(p+j*60),sizeof(sDL212_CONFIG)-j*60); 
+		memset(RxBuf,0,10);               
+	    SyncWait (Timer(),0.02);
 		len = ComRdTerm (sCOM.number, RxBuf, 10,0x0A);  
 		if(len == -99){
 			MessagePopup ("发送配置","    未响应    ");    
@@ -243,6 +247,44 @@ void CVICALLBACK ReadConfig_CB(int menubar, int menuItem, void *callbackData, in
 	else{
 		 MessagePopup ("读取配置","   读取参数校验错误    ");
 	}
+}
+
+int  CVICALLBACK Debug_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
+	unsigned char debug_mode=0,len;
+	char buf[35];
+	
+	switch (event){
+		case EVENT_COMMIT:
+			if(CLOSE == sCOM.status){
+	    	    MessagePopup ("调试模式","     请先打开串口     ");  
+				return 0;
+        	}
+			FlushOutQ (sCOM.number);  
+			FlushInQ (sCOM.number);  
+			GetCtrlVal(TabPanel_0_Handle,TABPANEL_0_RING_DEBUG_MODE,&debug_mode);  
+			switch(debug_mode){
+			    case 0:
+				  	strcpy(buf,"DL212 value display on");
+					len = ComWrt (sCOM.number,buf,23);
+			    break;
+				case 1:
+				    strcpy(buf,"DL212 value display off");
+					len = ComWrt (sCOM.number,buf,24);
+			    break;
+				case 2:
+				    strcpy(buf,"DL212 c1 port sdi12 transparent");
+					len = ComWrt (sCOM.number,buf,33);
+			    break;
+				case 3:
+				    strcpy(buf,"DL212 c2 port sdi12 transparent");
+					len = ComWrt (sCOM.number,buf,33);
+			    break;
+				default:
+				break;
+			}
+		break;
+	}
+	return 0;
 }
 
 void CVICALLBACK Exit(int menubar, int menuItem, void *callbackData, int panel){}

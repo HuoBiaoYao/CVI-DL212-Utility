@@ -22,13 +22,13 @@
 #define  PANEL_STRING_POWER               7       /* control type: string, callback function: (none) */
 #define  PANEL_TIMER                      8       /* control type: timer, callback function: Timer_CB */
 #define  PANEL_TEXTMSG_CLOCK_PC           9       /* control type: textMsg, callback function: (none) */
-#define  PANEL_TEXTMSG                    10      /* control type: textMsg, callback function: (none) */
-#define  PANEL_TEXTMSG_2                  11      /* control type: textMsg, callback function: (none) */
+#define  PANEL_TEXTMSG_2                  10      /* control type: textMsg, callback function: (none) */
+#define  PANEL_TEXTMSG                    11      /* control type: textMsg, callback function: (none) */
 
      /* tab page panel controls */
 #define  TABPANEL_0_TEXTBOX_T             2       /* control type: textBox, callback function: (none) */
 #define  TABPANEL_0_TEXTBOX_R             3       /* control type: textBox, callback function: (none) */
-#define  TABPANEL_0_RING_DEBUG_MODE       4       /* control type: ring, callback function: (none) */
+#define  TABPANEL_0_RING_DEBUG_MODE       4       /* control type: ring, callback function: Debug_CB */
 #define  TABPANEL_0_PICTURE               5       /* control type: picture, callback function: (none) */
 
      /* tab page panel controls */
@@ -159,6 +159,7 @@
 void CVICALLBACK About_CB(int menubar, int menuItem, void *callbackData, int panel);
 int  CVICALLBACK ComCtrl_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK ComSelect_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK Debug_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 void CVICALLBACK Exit(int menubar, int menuItem, void *callbackData, int panel);
 void CVICALLBACK File_SaveAs(int menubar, int menuItem, void *callbackData, int panel);
 void CVICALLBACK FileClose(int menubar, int menuItem, void *callbackData, int panel);

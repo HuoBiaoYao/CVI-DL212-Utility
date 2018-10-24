@@ -46,7 +46,9 @@ int GetDL212Rings(void){
 }
 
 int GetDL212Numerices(void){
-	GetCtrlVal(panelHandle,PANEL_NUMERIC_SCAN_INTERVAL,&sDL212_CONFIG.scan);   
+	GetCtrlVal(panelHandle,PANEL_NUMERIC_SCAN_INTERVAL,&sDL212_CONFIG.scan); 
+	sDL212_CONFIG.scan = sDL212_CONFIG.scan/100*100;
+	SetCtrlVal(panelHandle,PANEL_NUMERIC_SCAN_INTERVAL,sDL212_CONFIG.scan);    
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_1H ,&sDL212_CONFIG.vx_value[0]);
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_1L ,&sDL212_CONFIG.vx_value[1]);
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_2H ,&sDL212_CONFIG.vx_value[2]);
