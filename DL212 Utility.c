@@ -196,24 +196,27 @@ void CVICALLBACK SendConfig_CB(int menubar, int menuItem, void *callbackData, in
 		for(j=0;j<i-1;j++){
 			len = ComWrt (sCOM.number,(const char*)(p+j*60),60); 
 			SyncWait (Timer(),0.02);
-		} 
+		}
+		memset(RxBuf,0,10);
 		len = ComWrt (sCOM.number,(const char*)(p+j*60),sizeof(sDL212_CONFIG)-j*60); 
-		memset(RxBuf,0,10);               
-	    SyncWait (Timer(),0.02);
-		len = ComRdTerm (sCOM.number, RxBuf, 10,0x0A);  
-		if(len == -99){
-			MessagePopup ("发送配置","    未响应    ");    
-			return ;
-		}
-		if(0 == strncmp("lrc ok",RxBuf,6)){
-		   	MessagePopup ("发送配置","    发送完成，擦写FLASH需要2秒左右的时间，请不要立刻断电或者再次发送配置    ");
-		}
-		else if(0 == strncmp("lrc error",RxBuf,9)){
-			MessagePopup ("发送配置","    通讯校验错误    ");
-		}
-		else{
-			MessagePopup ("发送配置","    未响应    ");  	
-		}      
+		for(i=0;i<2;i++){
+			SyncWait (Timer(),0.02);
+			len = ComRdTerm (sCOM.number, RxBuf, 10,0x0A);   
+			if(len == -99){
+				MessagePopup ("发送配置","    未响应    ");    
+				return ;
+			}
+			if(len > 5){
+				if(0 == strncmp("lrc ok",RxBuf,6)){
+		   			MessagePopup ("发送配置","    发送完成，擦写FLASH需要2秒左右的时间，请不要立刻断电或者再次发送配置    ");
+					return ;
+				}
+				else if(0 == strncmp("lrc error",RxBuf,9)){
+					MessagePopup ("发送配置","    通讯校验错误    ");
+				}
+			}
+		}    
+		MessagePopup ("发送配置","    未响应    ");
 	}
 }
 
