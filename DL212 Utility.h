@@ -138,34 +138,26 @@
 
      /* Menu Bars, Menus, and Menu Items: */
 
-#define  MENUBAR                          1
-#define  MENUBAR_MENU1                    2
-#define  MENUBAR_MENU1_FILE_OPEN          3       /* callback function: FileOpen_CB */
-#define  MENUBAR_MENU1_FILE_SAVE          4       /* callback function: FileSave_CB */
-#define  MENUBAR_MENU1_FILE_SAVEAS        5       /* callback function: File_SaveAs */
-#define  MENUBAR_MENU1_FILE_CLOSE         6       /* callback function: FileClose */
-#define  MENUBAR_MENU1_SEPARATOR          7
-#define  MENUBAR_MENU1_SEPARATOR_2        8
-#define  MENUBAR_MENU1_EXIT               9       /* callback function: Exit */
-#define  MENUBAR_MENU1_2                  10
-#define  MENUBAR_MENU1_2_SEND_CONFIG      11      /* callback function: SendConfig_CB */
-#define  MENUBAR_MENU1_2_ITEM2            12      /* callback function: ReadConfig_CB */
-#define  MENUBAR_HELP                     13      /* callback function: Help_CB */
-#define  MENUBAR_HELP_ABOUT               14      /* callback function: About_CB */
+#define  MAINMENU                         1
+#define  MAINMENU_FILE                    2
+#define  MAINMENU_FILE_OPEN               3       /* callback function: FileOpen */
+#define  MAINMENU_FILE_SAVE               4       /* callback function: FileSave */
+#define  MAINMENU_FILE_SAVEAS             5       /* callback function: FileSaveAs */
+#define  MAINMENU_FILE_TOP_SEPARATOR      6
+#define  MAINMENU_FILE_ABOVE_EXIT_LINE    7
+#define  MAINMENU_MENU1_2                 8
+#define  MAINMENU_MENU1_2_SEND_CONFIG     9       /* callback function: SendConfig_CB */
+#define  MAINMENU_MENU1_2_ITEM2           10      /* callback function: ReadConfig_CB */
 
 
      /* Callback Prototypes: */
 
-void CVICALLBACK About_CB(int menubar, int menuItem, void *callbackData, int panel);
 int  CVICALLBACK ComCtrl_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK ComSelect_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Debug_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-void CVICALLBACK Exit(int menubar, int menuItem, void *callbackData, int panel);
-void CVICALLBACK File_SaveAs(int menubar, int menuItem, void *callbackData, int panel);
-void CVICALLBACK FileClose(int menubar, int menuItem, void *callbackData, int panel);
-void CVICALLBACK FileOpen_CB(int menubar, int menuItem, void *callbackData, int panel);
-void CVICALLBACK FileSave_CB(int menubar, int menuItem, void *callbackData, int panel);
-void CVICALLBACK Help_CB(int menubar, int menuItem, void *callbackData, int panel);
+void CVICALLBACK FileOpen(int menubar, int menuItem, void *callbackData, int panel);
+void CVICALLBACK FileSave(int menubar, int menuItem, void *callbackData, int panel);
+void CVICALLBACK FileSaveAs(int menubar, int menuItem, void *callbackData, int panel);
 int  CVICALLBACK MainPanel_CB(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK NumericesSet_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 void CVICALLBACK ReadConfig_CB(int menubar, int menuItem, void *callbackData, int panel);

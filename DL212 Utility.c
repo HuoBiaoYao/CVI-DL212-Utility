@@ -1,12 +1,14 @@
 #include "user.h"
-
+#include "menuutil.h"
 
 char TxBuf[1024],RxBuf[1024];
 char File_Name[MAX_PATHNAME_LEN];
-unsigned char QuitCtrl=1;	  	   
-int panelHandle,TabPanel_0_Handle,TabPanel_1_Handle,TabPanel_2_Handle;
+unsigned char QuitCtrl=1,SDI12CMD_Error[2];	  	   
+int panelHandle;
+int TabPanel_0_Handle,TabPanel_1_Handle,TabPanel_2_Handle;
 int File_Handle;
 
+   
 int main (int argc, char *argv[]){
 	int len;
 	char dirname[MAX_PATHNAME_LEN];
@@ -15,10 +17,18 @@ int main (int argc, char *argv[]){
 		return -1;	/* out of memory */
 	if ((panelHandle = LoadPanel (0, "DL212 Utility.uir", PANEL)) < 0)
 		return -1; 
+            
 	GetPanelHandleFromTabPage (panelHandle, PANEL_TAB, 0, &TabPanel_0_Handle); 
 	GetPanelHandleFromTabPage (panelHandle, PANEL_TAB, 1, &TabPanel_1_Handle);  
 	GetPanelHandleFromTabPage (panelHandle, PANEL_TAB, 2, &TabPanel_2_Handle);  
     DisplayPanel (panelHandle);
+	GetProjectDir (dirname);
+	sprintf (File_Name, "%s\\CONFIG.DL212", dirname);
+	File_Handle = OpenFile (File_Name, VAL_READ_WRITE, VAL_OPEN_AS_IS, VAL_ASCII);
+ 
+	
+	//ReadFile (File_Handle, &sDL212_Config, sizeof(sDL212_CONFIG);
+	CloseFile(File_Handle);
 	//SetCtrlAttribute(panelHandle,TABPANEL_0_TEXTBOX_R,ATTR_WRAP_MODE,VAL_CHAR_WRAP);
 	//RecallPanelState (panelHandle, "panel_state", 0);				 			  
 	COM_Enumerate();
@@ -28,6 +38,7 @@ int main (int argc, char *argv[]){
 	GetDL212Strings();
 	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D1,&sDL212_CONFIG.sdi12_cmd[0][0]); 
 	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D2,&sDL212_CONFIG.sdi12_cmd[1][0]); 
+	sDL212_CONFIG.lrc = LRC((unsigned char *)&sDL212_CONFIG,sizeof(sDL212_CONFIG)-4);
 	
 	ATTRDimmed_Ctrl();	
 	
@@ -36,7 +47,8 @@ int main (int argc, char *argv[]){
 	while(QuitCtrl){
 	    ProcessSystemEvents(); 
 	}
-	DiscardPanel (panelHandle);
+    DiscardPanel (panelHandle);
+    CloseCVIRTE ();
 	return 0;
 }
    
@@ -157,14 +169,20 @@ int  CVICALLBACK Sdi12CmdSet_CB(int panel, int control, int event, void *callbac
 	}
 	switch (event){
 		case EVENT_COMMIT:
-			//GetCtrlAttribute (TabPanel_2_Handle, control, ATTR_STRING_TEXT_LENGTH, &len);	
-			//memset(&sDL212_CONFIG.sdi12_cmd[i][0],0,200);
-			GetCtrlVal(TabPanel_2_Handle,control,&sDL212_CONFIG.sdi12_cmd[i][0]);
+		case EVENT_LEFT_CLICK:
+		case EVENT_VAL_CHANGED:
+		case EVENT_KEYPRESS:
+			GetCtrlAttribute (TabPanel_2_Handle, control, ATTR_STRING_TEXT_LENGTH, &len);
 			if(len > 1){
-			    if(sDL212_CONFIG.sdi12_cmd[i][len-1] != '\n'){
-			        sDL212_CONFIG.sdi12_cmd[i][len]='\r',sDL212_CONFIG.sdi12_cmd[i][len+1]='\n';
+				memset(&sDL212_CONFIG.sdi12_cmd[i][0],0,200);
+				GetCtrlVal(TabPanel_2_Handle,control,&sDL212_CONFIG.sdi12_cmd[i][0]);
+				if(1 == SDI12CMD_Check(&sDL212_CONFIG.sdi12_cmd[i][0],len) ){
+					SDI12CMD_Error[i] = ERROR;
 				}
-			} 
+				else{
+					SDI12CMD_Error[i] = OK;             
+				}
+ 			}
 			//File_2_Handle = OpenFile (File_2_Name, VAL_WRITE_ONLY, VAL_TRUNCATE, VAL_ASCII);
 			//WriteFile (File_2_Handle, &sDL212_CONFIG.sdi12_cmd[i][0], 200);
 			//CloseFile(File_2_Handle);
@@ -226,7 +244,7 @@ void CVICALLBACK ReadConfig_CB(int menubar, int menuItem, void *callbackData, in
 	char byte,buf[33];
     char *p;
 	
-	p = &sDL212_CONFIG;
+	p = (char*)&sDL212_CONFIG;
 	FlushOutQ (sCOM.number);  
 	FlushInQ (sCOM.number);  
 	strcpy(buf,"DL212 Configuration Utility Read");
@@ -245,7 +263,7 @@ void CVICALLBACK ReadConfig_CB(int menubar, int menuItem, void *callbackData, in
 	lrc = LRC((unsigned char *)&sDL212_CONFIG,sizeof(sDL212_CONFIG)-4);
 	if(lrc == sDL212_CONFIG.lrc){
 	 	MessagePopup ("读取配置","   读取参数完成    ");  
-		SetPanelValuesFromFile();
+		SetPanelValuesFromFile(&sDL212_CONFIG);
 	}
 	else{
 		 MessagePopup ("读取配置","   读取参数校验错误    ");
@@ -253,7 +271,8 @@ void CVICALLBACK ReadConfig_CB(int menubar, int menuItem, void *callbackData, in
 }
 
 int  CVICALLBACK Debug_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
-	unsigned char debug_mode=0,len;
+	unsigned char debug_mode=0;
+	int len;
 	char buf[35];
 	
 	switch (event){
@@ -289,15 +308,7 @@ int  CVICALLBACK Debug_CB(int panel, int control, int event, void *callbackData,
 	}
 	return 0;
 }
-
-void CVICALLBACK Exit(int menubar, int menuItem, void *callbackData, int panel){}
-void CVICALLBACK File_SaveAs(int menubar, int menuItem, void *callbackData, int panel){}
-void CVICALLBACK FileClose(int menubar, int menuItem, void *callbackData, int panel){}
-void CVICALLBACK FileOpen_CB(int menubar, int menuItem, void *callbackData, int panel){}
-void CVICALLBACK FileSave_CB(int menubar, int menuItem, void *callbackData, int panel){}
-void CVICALLBACK Help_CB(int menubar, int menuItem, void *callbackData, int panel){}
-void CVICALLBACK About_CB(int menubar, int menuItem, void *callbackData, int panel){}
-
+   
 static const char *DaysOfWeek[] = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
 int  CVICALLBACK Timer_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
 	unsigned int year, month, day, hour, min, sec, weekDay;
@@ -316,3 +327,66 @@ int  CVICALLBACK Timer_CB(int panel, int control, int event, void *callbackData,
 	}
 	return 0;
 }	
+
+
+
+void CVICALLBACK FileOpen (int menuBar, int menuItem, void *callbackData,int panel){
+    int  stat;	    
+	char pathname[MAX_PATHNAME_LEN];
+	int file_Handle;   
+	struct _DL212_CONFIG config;
+	unsigned char lrc;  
+			 
+    stat = FileSelectPopupEx ("", "*.DL212", "", "打开文件",VAL_LOAD_BUTTON, 0, 0, pathname);
+    if((stat == VAL_EXISTING_FILE_SELECTED) || (stat == VAL_NEW_FILE_SELECTED)){
+		file_Handle = OpenFile (pathname, VAL_READ_WRITE, VAL_OPEN_AS_IS, VAL_ASCII); 
+		ReadFile (file_Handle, (char*)&config, sizeof(config));
+		
+		lrc = LRC((unsigned char *)&config,sizeof(config)-4);
+		if(lrc == config.lrc){ 
+			SetPanelValuesFromFile(&config);
+			memcpy((void*)&sDL212_CONFIG,(void*)&config,sizeof(sDL212_CONFIG));
+		}
+		else{
+			 MessagePopup ("读取配置","   文件校验错误    ");
+		}
+		CloseFile(file_Handle);	 
+	}
+}
+
+void CVICALLBACK FileSave (int menuBar, int menuItem, void *callbackData,int panel){
+	int  stat; 
+    char pathname[MAX_PATHNAME_LEN];
+    int file_Handle;
+	
+    stat = FileSelectPopupEx ("", "*.DL212", "", "另存为:",VAL_SAVE_BUTTON, 0, 0, pathname);
+                              
+    if ((stat == VAL_EXISTING_FILE_SELECTED) || (stat == VAL_NEW_FILE_SELECTED)){
+		file_Handle = OpenFile (pathname, VAL_READ_WRITE, VAL_OPEN_AS_IS, VAL_ASCII);  
+		GetDL212Rings();
+        GetDL212Numerices();
+        GetDL212Strings();
+		sDL212_CONFIG.lrc = LRC((unsigned char *)&sDL212_CONFIG,sizeof(sDL212_CONFIG)-4); 
+		WriteFile(file_Handle,(char*)&sDL212_CONFIG,sizeof(sDL212_CONFIG));
+		CloseFile(file_Handle);
+	}
+}
+
+void CVICALLBACK FileSaveAs (int menuBar, int menuItem, void *callbackData,int panel){
+    int  stat; 
+    char pathname[MAX_PATHNAME_LEN];
+    int file_Handle;
+	
+    stat = FileSelectPopupEx ("", "*.DL212", "", "另存为:",VAL_SAVE_BUTTON, 0, 0, pathname);
+    if ((stat == VAL_EXISTING_FILE_SELECTED) || (stat == VAL_NEW_FILE_SELECTED)){
+		file_Handle = OpenFile (pathname, VAL_READ_WRITE, VAL_OPEN_AS_IS, VAL_ASCII);
+	    GetDL212Rings();
+        GetDL212Numerices();
+        GetDL212Strings();
+		sDL212_CONFIG.lrc = LRC((unsigned char *)&sDL212_CONFIG,sizeof(sDL212_CONFIG)-4); 
+		WriteFile(file_Handle,&sDL212_CONFIG,sizeof(sDL212_CONFIG));
+		CloseFile(file_Handle);
+	}
+}
+ 
+  

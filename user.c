@@ -4,8 +4,83 @@
 struct _COM sCOM;
 struct _DL212_CONFIG sDL212_CONFIG;			 
 
-int SetPanelValuesFromFile(void){
-  return 0;
+int SetPanelValuesFromFile(struct _DL212_CONFIG *config){
+	SetCtrlVal(panelHandle,PANEL_STRING_DEVICEID,config->device_id);	  
+	SetCtrlVal(panelHandle,PANEL_NUMERIC_SCAN_INTERVAL,config->scan);            
+	
+    SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_MODE_HL1,config->mode[0]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_MODE_HL2,config->mode[1]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_MODE_HL3,config->mode[2]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_SW_1H,config->sw[0]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_SW_1L,config->sw[1]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_SW_2H,config->sw[2]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_SW_2L,config->sw[3]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_SW_3H,config->sw[4]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_SW_3L,config->sw[5]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_VX_SW_1H,config->vx_sw[0]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_VX_SW_1L,config->vx_sw[1]);  
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_VX_SW_2H,config->vx_sw[2]);  
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_VX_SW_2L,config->vx_sw[3]);  
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_VX_SW_3H,config->vx_sw[4]);  
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_VX_SW_3L,config->vx_sw[5]);   
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_1H,config->range[0]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_1L,config->range[1]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_2H,config->range[2]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_2L,config->range[3]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_3H,config->range[4]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_3L,config->range[5]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_1H,config->vx_value[0]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_1L,config->vx_value[1]);   
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_2H,config->vx_value[2]);   
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_2L,config->vx_value[3]);   
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_3H,config->vx_value[4]);   
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_VX_VALUE_3L,config->vx_value[5]);   
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_MUL_1H,config->mul[0]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_MUL_1L,config->mul[1]);    
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_MUL_2H,config->mul[2]);    
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_MUL_2L,config->mul[3]);    
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_MUL_3H,config->mul[4]);    
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_MUL_3L,config->mul[5]);      
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_OFFSET_1H,config->offset[0]);
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_OFFSET_1L,config->offset[1]);  
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_OFFSET_2H,config->offset[2]);  
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_OFFSET_2L,config->offset[3]);  
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_OFFSET_3H,config->offset[4]);  
+	SetCtrlVal(TabPanel_1_Handle,TABPANEL_1_NUMERIC_OFFSET_3L,config->offset[5]);  
+	
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_MODE_D1,config->mode[3]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_MODE_D2,config->mode[4]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_SW_SW12,config->sw[6]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_SW_PSW,config->sw[7]);    
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_SW_PLL,config->sw[8]);    
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_SW_D1,config->sw[9]);    
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_SW_D2,config->sw[10]);    
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_PSW,config->mea_time[0]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_PLL,config->mea_time[1]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D1,config->mea_time[2]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D2,config->mea_time[3]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_PSW,config->datatype[0]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_PLL,config->datatype[1]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D1,config->datatype[2]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D2,config->datatype[3]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_PSW,config->mul[6]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_PLL,config->mul[7]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D1,config->mul[8]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MUL_D2,config->mul[9]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_PSW,config->offset[6]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_PLL,config->offset[7]); 
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D1,config->offset[8]); 
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_NUMERIC_OFFSET_D2,config->offset[9]); 
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_STRING_S0_D1,&config->s0[0][0]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_STRING_S0_D2,&config->s0[1][0]);    
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_STRING_S1_D1,&config->s1[0][0]);    
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_STRING_S1_D2,&config->s1[1][0]);   
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D1,&config->s2[0][0]);   
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D2,&config->s2[1][0]);   
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D1,&config->sdi12_cmd[0][0]);
+	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D2,&config->sdi12_cmd[1][0]); 
+								   
+	return 0;
 }
 
 int GetDL212Rings(void){ 															         
@@ -25,12 +100,12 @@ int GetDL212Rings(void){
 	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_SW_PLL,&sDL212_CONFIG.sw[8]);
 	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_SW_D1,&sDL212_CONFIG.sw[9]);
 	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_SW_D2,&sDL212_CONFIG.sw[10]);     
-	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_1H ,&sDL212_CONFIG.rang[0]);
-	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_1L ,&sDL212_CONFIG.rang[1]); 
-	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_2H ,&sDL212_CONFIG.rang[2]); 
-	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_2L ,&sDL212_CONFIG.rang[3]); 
-	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_3H ,&sDL212_CONFIG.rang[4]); 
-	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_3L ,&sDL212_CONFIG.rang[5]);     
+	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_1H ,&sDL212_CONFIG.range[0]);
+	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_1L ,&sDL212_CONFIG.range[1]); 
+	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_2H ,&sDL212_CONFIG.range[2]); 
+	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_2L ,&sDL212_CONFIG.range[3]); 
+	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_3H ,&sDL212_CONFIG.range[4]); 
+	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_RANGE_3L ,&sDL212_CONFIG.range[5]);     
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_VX_SW_1H ,&sDL212_CONFIG.vx_sw[0]);
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_VX_SW_1L ,&sDL212_CONFIG.vx_sw[1]);
 	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_VX_SW_2H ,&sDL212_CONFIG.vx_sw[2]);
@@ -404,6 +479,16 @@ int ATTRDimmed_Ctrl(void){
 	}
 	return 0;
 }
+   
+int SDI12CMD_Check(char *c,unsigned int len){
+	if(0 == isalnum(*c) || '!'!=*(c+len-1)){
+		return 1;			   
+	}
+	*(c+1) = '\r';
+	*(c+1) = '\n';	
+	
+	return 0;
+}
 
 int COM_Enumerate(void){     
 	unsigned char portNumber[100]={0};
@@ -448,4 +533,4 @@ unsigned char LRC( unsigned char *buf,unsigned short int len){
     /* Return twos complement */
     lrc = (unsigned char)(-((char)lrc));
     return lrc;
-}
+}   
