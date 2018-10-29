@@ -2,7 +2,8 @@
 #include "DL212 Utility.h"
 
 struct _COM sCOM;
-struct _DL212_CONFIG sDL212_CONFIG;			 
+struct _DL212_CONFIG sDL212_CONFIG;		
+unsigned char IS_SDI12CMD_OK[2]={ERROR,ERROR};
 
 int SetPanelValuesFromFile(struct _DL212_CONFIG *config){
 	SetCtrlVal(panelHandle,PANEL_STRING_DEVICEID,config->device_id);	  
@@ -79,9 +80,20 @@ int SetPanelValuesFromFile(struct _DL212_CONFIG *config){
 	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_STRING_S2_D2,&config->s2[1][0]);   
 	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D1,&config->sdi12_cmd[0][0]);
 	SetCtrlVal(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D2,&config->sdi12_cmd[1][0]); 
-								   
+ 							   
 	return 0;
 }
+
+int GetPanelValues(void){
+	GetDL212Rings();
+	GetDL212Numerices();
+	GetDL212Strings();
+	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D1,&sDL212_CONFIG.sdi12_cmd[0][0]); 
+	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_TEXTBOX_SDI12CMD_D2,&sDL212_CONFIG.sdi12_cmd[1][0]); 
+	sDL212_CONFIG.lrc = LRC((unsigned char *)&sDL212_CONFIG,sizeof(sDL212_CONFIG)-4);
+	return 0;
+}
+
 
 int GetDL212Rings(void){ 															         
  	GetCtrlVal(TabPanel_1_Handle,TABPANEL_1_RING_MODE_HL1,&sDL212_CONFIG.mode[0]);
@@ -116,7 +128,8 @@ int GetDL212Rings(void){
 	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_PLL ,&sDL212_CONFIG.datatype[1]);
 	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D1 ,&sDL212_CONFIG.datatype[2]);  
 	GetCtrlVal(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D2 ,&sDL212_CONFIG.datatype[3]);  
-
+	ATTRDimmed_Ctrl();
+	
 	return 0;
 }
 
@@ -423,7 +436,7 @@ int ATTRDimmed_Ctrl(void){
 		
 	}
 	//D2Í¨µÀ
-	if(MODE_VOLT_DIFF == sDL212_CONFIG.sw[10]){     
+	if(CLOSE == sDL212_CONFIG.sw[10]){     
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_MODE_D2 ,ATTR_DIMMED,1);	
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_NUMERIC_MEATIME_D2 ,ATTR_DIMMED,1);      
 		SetCtrlAttribute(TabPanel_2_Handle,TABPANEL_2_RING_DATATYPE_D2 ,ATTR_DIMMED,1);
@@ -480,13 +493,23 @@ int ATTRDimmed_Ctrl(void){
 	return 0;
 }
    
-int SDI12CMD_Check(char *c,unsigned int len){
-	if(0 == isalnum(*c) || '!'!=*(c+len-1)){
-		return 1;			   
+int SDI12CMD_Check(unsigned char port,char *c,unsigned int len){
+	if(MODE_SDI12==sDL212_CONFIG.mode[port+3] && OPEN==sDL212_CONFIG.sw[port+9]){
+		if(len < 2){
+			IS_SDI12CMD_OK[port] = ERROR;    
+		}
+		else{
+			if(0 == isalnum(*c) || '!'!=*(c+len-1)){
+				return 1;			   
+			}
+			*(c+1) = '\r';
+			*(c+1) = '\n';	
+			IS_SDI12CMD_OK[port] = OK;
+		}  
 	}
-	*(c+1) = '\r';
-	*(c+1) = '\n';	
-	
+	else{
+		IS_SDI12CMD_OK[port] = ERROR; 
+	}
 	return 0;
 }
 

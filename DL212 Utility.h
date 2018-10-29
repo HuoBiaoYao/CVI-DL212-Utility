@@ -13,74 +13,73 @@
 
      /* Panels and Controls: */
 
-#define  PANEL                            1       /* callback function: MainPanel_CB */
-#define  PANEL_STRING_DEVICEID            2       /* control type: string, callback function: StringsSet_CB */
-#define  PANEL_NUMERIC_SCAN_INTERVAL      3       /* control type: numeric, callback function: NumericesSet_CB */
+#define  PANEL                            1       /* callback function: MainPanel */
+#define  PANEL_STRING_DEVICEID            2       /* control type: string, callback function: (none) */
+#define  PANEL_NUMERIC_SCAN_INTERVAL      3       /* control type: numeric, callback function: (none) */
 #define  PANEL_TAB                        4       /* control type: tab, callback function: (none) */
-#define  PANEL_RING_COM                   5       /* control type: ring, callback function: ComSelect_CB */
-#define  PANEL_TB_COM_CTRL                6       /* control type: textButton, callback function: ComCtrl_CB */
+#define  PANEL_RING_COM                   5       /* control type: ring, callback function: ComSelect */
+#define  PANEL_TB_COM_CTRL                6       /* control type: textButton, callback function: ComCtrl */
 #define  PANEL_STRING_POWER               7       /* control type: string, callback function: (none) */
-#define  PANEL_TIMER                      8       /* control type: timer, callback function: Timer_CB */
-#define  PANEL_TEXTMSG_CLOCK_PC           9       /* control type: textMsg, callback function: (none) */
+#define  PANEL_TEXTMSG_CLOCK_PC           8       /* control type: textMsg, callback function: (none) */
+#define  PANEL_TEXTMSG                    9       /* control type: textMsg, callback function: (none) */
 #define  PANEL_TEXTMSG_2                  10      /* control type: textMsg, callback function: (none) */
-#define  PANEL_TEXTMSG                    11      /* control type: textMsg, callback function: (none) */
+#define  PANEL_TIMER                      11      /* control type: timer, callback function: Clock */
 
      /* tab page panel controls */
-#define  TABPANEL_0_TEXTBOX_T             2       /* control type: textBox, callback function: (none) */
-#define  TABPANEL_0_TEXTBOX_R             3       /* control type: textBox, callback function: (none) */
-#define  TABPANEL_0_RING_DEBUG_MODE       4       /* control type: ring, callback function: Debug_CB */
-#define  TABPANEL_0_PICTURE               5       /* control type: picture, callback function: (none) */
+#define  TABPANEL_0_TEXTBOX_T             2       /* control type: textBox, callback function: TxTextBox */
+#define  TABPANEL_0_TEXTBOX_R             3       /* control type: textBox, callback function: RxTextBox */
+#define  TABPANEL_0_RING_DEBUG_MODE       4       /* control type: ring, callback function: DebugMode */
 
      /* tab page panel controls */
-#define  TABPANEL_1_RING_VX_SW_3L         2       /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_SW_3L            3       /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_VX_SW_3H         4       /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_NUMERIC_VX_VALUE_3L   5       /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_NUMERIC_OFFSET_3L     6       /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_NUMERIC_MUL_3L        7       /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_RING_SW_3H            8       /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_NUMERIC_VX_VALUE_3H   9       /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_NUMERIC_OFFSET_3H     10      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_NUMERIC_MUL_3H        11      /* control type: numeric, callback function: NumericesSet_CB */
+#define  TABPANEL_1_RING_VX_SW_3L         2       /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_SW_3L            3       /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_VX_SW_3H         4       /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_NUMERIC_VX_VALUE_3L   5       /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_NUMERIC_OFFSET_3L     6       /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_NUMERIC_MUL_3L        7       /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_RING_SW_3H            8       /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_NUMERIC_VX_VALUE_3H   9       /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_NUMERIC_OFFSET_3H     10      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_NUMERIC_MUL_3H        11      /* control type: numeric, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_14            12      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_15            13      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_16            14      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_17            15      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_18            16      /* control type: textMsg, callback function: (none) */
-#define  TABPANEL_1_RING_VX_SW_2L         17      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_SW_2L            18      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_VX_SW_2H         19      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_NUMERIC_VX_VALUE_2L   20      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_NUMERIC_OFFSET_2L     21      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_NUMERIC_MUL_2L        22      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_RING_SW_2H            23      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_NUMERIC_VX_VALUE_2H   24      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_NUMERIC_OFFSET_2H     25      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_NUMERIC_MUL_2H        26      /* control type: numeric, callback function: NumericesSet_CB */
+#define  TABPANEL_1_RING_VX_SW_2L         17      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_SW_2L            18      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_VX_SW_2H         19      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_NUMERIC_VX_VALUE_2L   20      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_NUMERIC_OFFSET_2L     21      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_NUMERIC_MUL_2L        22      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_RING_SW_2H            23      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_NUMERIC_VX_VALUE_2H   24      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_NUMERIC_OFFSET_2H     25      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_NUMERIC_MUL_2H        26      /* control type: numeric, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_9             27      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_10            28      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_11            29      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_12            30      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_13            31      /* control type: textMsg, callback function: (none) */
-#define  TABPANEL_1_RING_VX_SW_1L         32      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_SW_1L            33      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_VX_SW_1H         34      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_NUMERIC_VX_VALUE_1L   35      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_NUMERIC_OFFSET_1L     36      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_NUMERIC_MUL_1L        37      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_RING_SW_1H            38      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_RANGE_3L         39      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_RANGE_3H         40      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_RANGE_2L         41      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_RANGE_2H         42      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_RANGE_1L         43      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_RANGE_1H         44      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_MODE_HL3         45      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_MODE_HL2         46      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_RING_MODE_HL1         47      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_1_NUMERIC_VX_VALUE_1H   48      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_NUMERIC_OFFSET_1H     49      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_1_NUMERIC_MUL_1H        50      /* control type: numeric, callback function: NumericesSet_CB */
+#define  TABPANEL_1_RING_VX_SW_1L         32      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_SW_1L            33      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_VX_SW_1H         34      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_NUMERIC_VX_VALUE_1L   35      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_NUMERIC_OFFSET_1L     36      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_NUMERIC_MUL_1L        37      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_RING_SW_1H            38      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_RANGE_3L         39      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_RANGE_3H         40      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_RANGE_2L         41      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_RANGE_2H         42      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_RANGE_1L         43      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_RANGE_1H         44      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_MODE_HL3         45      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_MODE_HL2         46      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_RING_MODE_HL1         47      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_1_NUMERIC_VX_VALUE_1H   48      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_NUMERIC_OFFSET_1H     49      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_1_NUMERIC_MUL_1H        50      /* control type: numeric, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_4             51      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_8             52      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_5             53      /* control type: textMsg, callback function: (none) */
@@ -88,34 +87,34 @@
 #define  TABPANEL_1_TEXTMSG               55      /* control type: textMsg, callback function: (none) */
 
      /* tab page panel controls */
-#define  TABPANEL_2_RING_MODE_D2          2       /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_2_RING_SW_D2            3       /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_2_RING_DATATYPE_D2      4       /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_2_RING_MODE_D1          5       /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_2_RING_SW_D1            6       /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_2_RING_DATATYPE_D1      7       /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_2_RING_DATATYPE_PSW     8       /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_2_RING_DATATYPE_PLL     9       /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_2_RING_SW_PLL           10      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_2_STRING_S2_D2          11      /* control type: string, callback function: StringsSet_CB */
-#define  TABPANEL_2_STRING_S1_D2          12      /* control type: string, callback function: StringsSet_CB */
-#define  TABPANEL_2_STRING_S0_D2          13      /* control type: string, callback function: StringsSet_CB */
-#define  TABPANEL_2_NUMERIC_OFFSET_PLL    14      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_2_NUMERIC_OFFSET_D2     15      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_2_NUMERIC_MUL_PLL       16      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_2_NUMERIC_MUL_D2        17      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_2_RING_SW_SW12          18      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_2_TEXTBOX_SDI12CMD_D2   19      /* control type: textBox, callback function: Sdi12CmdSet_CB */
+#define  TABPANEL_2_RING_MODE_D2          2       /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_2_RING_SW_D2            3       /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_2_RING_DATATYPE_D2      4       /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_2_RING_MODE_D1          5       /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_2_RING_SW_D1            6       /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_2_RING_DATATYPE_D1      7       /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_2_RING_DATATYPE_PSW     8       /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_2_RING_DATATYPE_PLL     9       /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_2_RING_SW_PLL           10      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_2_STRING_S2_D2          11      /* control type: string, callback function: (none) */
+#define  TABPANEL_2_STRING_S1_D2          12      /* control type: string, callback function: (none) */
+#define  TABPANEL_2_STRING_S0_D2          13      /* control type: string, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_OFFSET_PLL    14      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_OFFSET_D2     15      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MUL_PLL       16      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MUL_D2        17      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_RING_SW_SW12          18      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_2_TEXTBOX_SDI12CMD_D2   19      /* control type: textBox, callback function: Sdi12CmdSet */
 #define  TABPANEL_2_TEXTMSG_5             20      /* control type: textMsg, callback function: (none) */
-#define  TABPANEL_2_STRING_S2_D1          21      /* control type: string, callback function: StringsSet_CB */
-#define  TABPANEL_2_STRING_S1_D1          22      /* control type: string, callback function: StringsSet_CB */
-#define  TABPANEL_2_STRING_S0_D1          23      /* control type: string, callback function: StringsSet_CB */
-#define  TABPANEL_2_RING_SW_PSW           24      /* control type: ring, callback function: RingsConfig_CB */
-#define  TABPANEL_2_NUMERIC_OFFSET_D1     25      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_2_NUMERIC_OFFSET_PSW    26      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_2_NUMERIC_MUL_D1        27      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_2_NUMERIC_MUL_PSW       28      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_2_TEXTBOX_SDI12CMD_D1   29      /* control type: textBox, callback function: Sdi12CmdSet_CB */
+#define  TABPANEL_2_STRING_S2_D1          21      /* control type: string, callback function: (none) */
+#define  TABPANEL_2_STRING_S1_D1          22      /* control type: string, callback function: (none) */
+#define  TABPANEL_2_STRING_S0_D1          23      /* control type: string, callback function: (none) */
+#define  TABPANEL_2_RING_SW_PSW           24      /* control type: ring, callback function: RingsConfig */
+#define  TABPANEL_2_NUMERIC_OFFSET_D1     25      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_OFFSET_PSW    26      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MUL_D1        27      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MUL_PSW       28      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_TEXTBOX_SDI12CMD_D1   29      /* control type: textBox, callback function: Sdi12CmdSet */
 #define  TABPANEL_2_TEXTMSG_4             30      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_2_TEXTMSG_3             31      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_2_TEXTMSG_2             32      /* control type: textMsg, callback function: (none) */
@@ -125,10 +124,10 @@
 #define  TABPANEL_2_DECORATION_3          36      /* control type: deco, callback function: (none) */
 #define  TABPANEL_2_DECORATION_4          37      /* control type: deco, callback function: (none) */
 #define  TABPANEL_2_DECORATION_5          38      /* control type: deco, callback function: (none) */
-#define  TABPANEL_2_NUMERIC_MEATIME_PLL   39      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_2_NUMERIC_MEATIME_PSW   40      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_2_NUMERIC_MEATIME_D1    41      /* control type: numeric, callback function: NumericesSet_CB */
-#define  TABPANEL_2_NUMERIC_MEATIME_D2    42      /* control type: numeric, callback function: NumericesSet_CB */
+#define  TABPANEL_2_NUMERIC_MEATIME_PLL   39      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MEATIME_PSW   40      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MEATIME_D1    41      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MEATIME_D2    42      /* control type: numeric, callback function: (none) */
 
 
      /* Control Arrays: */
@@ -146,26 +145,31 @@
 #define  MAINMENU_FILE_TOP_SEPARATOR      6
 #define  MAINMENU_FILE_ABOVE_EXIT_LINE    7
 #define  MAINMENU_MENU1_2                 8
-#define  MAINMENU_MENU1_2_SEND_CONFIG     9       /* callback function: SendConfig_CB */
-#define  MAINMENU_MENU1_2_ITEM2           10      /* callback function: ReadConfig_CB */
+#define  MAINMENU_MENU1_2_SEND_CONFIG     9       /* callback function: SendConfig */
+#define  MAINMENU_MENU1_2_ITEM2           10      /* callback function: ReadConfig */
+
+#define  MENUBAR                          2
+#define  MENUBAR_MENU1                    2
+#define  MENUBAR_MENU1_ITEM1              3       /* callback function: ClearBox */
 
 
      /* Callback Prototypes: */
 
-int  CVICALLBACK ComCtrl_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK ComSelect_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK Debug_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+void CVICALLBACK ClearBox(int menubar, int menuItem, void *callbackData, int panel);
+int  CVICALLBACK Clock(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK ComCtrl(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK ComSelect(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DebugMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 void CVICALLBACK FileOpen(int menubar, int menuItem, void *callbackData, int panel);
 void CVICALLBACK FileSave(int menubar, int menuItem, void *callbackData, int panel);
 void CVICALLBACK FileSaveAs(int menubar, int menuItem, void *callbackData, int panel);
-int  CVICALLBACK MainPanel_CB(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK NumericesSet_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-void CVICALLBACK ReadConfig_CB(int menubar, int menuItem, void *callbackData, int panel);
-int  CVICALLBACK RingsConfig_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK Sdi12CmdSet_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-void CVICALLBACK SendConfig_CB(int menubar, int menuItem, void *callbackData, int panel);
-int  CVICALLBACK StringsSet_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK Timer_CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK MainPanel(int panel, int event, void *callbackData, int eventData1, int eventData2);
+void CVICALLBACK ReadConfig(int menubar, int menuItem, void *callbackData, int panel);
+int  CVICALLBACK RingsConfig(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK RxTextBox(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK Sdi12CmdSet(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+void CVICALLBACK SendConfig(int menubar, int menuItem, void *callbackData, int panel);
+int  CVICALLBACK TxTextBox(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus

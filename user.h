@@ -24,6 +24,11 @@
 #define MODE_PULSE	   1
 #define MODE_COM	   2
 
+#define VALUE_DISPLAY_ON    0
+#define VALUE_DISPLAY_OFF   1
+#define SDI12_0_TRANSPARENT 2
+#define SDI12_1_TRANSPARENT 3
+
 struct _COM{
   unsigned char number;
   int status;
@@ -44,23 +49,24 @@ struct _DL212_CONFIG{
   char s0[2][3];//分隔符//包含结束符    
   char s1[2][3];//起始符//包含结束符    
   char s2[2][3];//终止符//包含结束符    
-  char sdi12_cmd[2][200];
+  char sdi12_cmd[2][300];
   unsigned char lrc;
 };
 
 extern struct _COM sCOM; 
-struct _DL212_CONFIG sDL212_CONFIG;	
+extern struct _DL212_CONFIG sDL212_CONFIG;	
+extern unsigned char IS_SDI12CMD_OK[2]; 
 extern int panelHandle,TabPanel_0_Handle,TabPanel_1_Handle,TabPanel_2_Handle;  
 
 int SetPanelValuesFromFile(struct _DL212_CONFIG *buf);
+int GetPanelValues(void);
 int GetDL212Rings(void);
 int GetDL212Numerices(void);
 int GetDL212Strings(void);
 int ATTRDimmed_Ctrl(void);
-int SDI12CMD_Check(char *c,unsigned int len);
+int SDI12CMD_Check(unsigned char port,char *c,unsigned int len);
 int COM_Enumerate(void);
 int Compare(const void*a,const void*b);
 unsigned char LRC( unsigned char *buf,unsigned short int len);
 
-
-int GetTopChildWindow (int panelHandle);
+			   
