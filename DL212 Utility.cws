@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 4
+Number of Opened Files = 5
 Window Confinement Region Enabled = True
 MainColumnWidth = 180
 FileDateColumnWidth = 70
@@ -54,12 +54,12 @@ In Projects = "1,"
 [File 0002]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.c"
 File Type = "CSource"
-Disk Date = 3623646654
+Disk Date = 3623737154
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
 Window Z-Order = 1
-Source Window State = "1,32,32,32,4,18,18,0,0,141,0,26,0,1,0,24,28,0,42,48,407,688,1,22,"
+Source Window State = "1,120,123,123,26,36,36,0,0,141,0,26,0,1,0,24,85,0,99,33,407,688,1,22,"
 
 [File 0003]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.uir"
@@ -70,7 +70,7 @@ Window Top = 32
 Window Left = 10
 Window Height = 263
 Window Width = 528
-Window Z-Order = 4
+Window Z-Order = 2
 
 [File 0004]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.h"
@@ -79,7 +79,7 @@ Disk Date = 3623645228
 In Projects = "1,"
 Window Top = 152
 Window Left = 74
-Window Z-Order = 3
+Window Z-Order = 5
 Source Window State = "1,29,29,29,9,29,29,0,0,80,0,0,0,0,0,15,155,0,155,34,299,688,1,22,"
 
 [File 0005]
@@ -89,17 +89,18 @@ Disk Date = 3623646352
 In Projects = "1,"
 Window Top = 62
 Window Left = 26
-Window Z-Order = 2
+Window Z-Order = 4
 Source Window State = "1,61,61,61,4,18,18,0,3,80,0,11,0,10,0,15,49,0,61,4,299,688,1,14,"
 
 [File 0006]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/user.c"
 File Type = "CSource"
-Disk Date = 3623630728
+Disk Date = 3623736090
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Source Window State = "1,185,185,185,4,19,19,0,3,0,0,484,0,548,0,0,173,0,185,4,299,688,1,22,"
+Window Z-Order = 3
+Source Window State = "1,503,505,505,14,30,30,0,0,80,0,482,0,546,0,15,497,0,505,31,299,688,1,22,"
 
 [File 0007]
 Path = "/c/Program Files/Windows Kits/8.1/Lib/winv6.3/um/x86/AdvAPI32.Lib"
@@ -112,6 +113,7 @@ Tab 0001 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.uir"
 Tab 0002 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.c"
 Tab 0003 = "/d/GitHubRepository/CVI-DL212-Utility/user.h"
 Tab 0004 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.h"
+Tab 0005 = "/d/GitHubRepository/CVI-DL212-Utility/user.c"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

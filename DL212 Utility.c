@@ -10,7 +10,7 @@ int panelHandle;
 int TabPanel_0_Handle,TabPanel_1_Handle,TabPanel_2_Handle; 
    
 int main (int argc, char *argv[]){
-	int len;
+	int len; 
 	char dirname[MAX_PATHNAME_LEN];
 	
 	if (InitCVIRTE (0, argv, 0) == 0)
@@ -37,13 +37,13 @@ int main (int argc, char *argv[]){
 	while(QuitCtrl){
 	    ProcessSystemEvents();
 		if(VALUE_DISPLAY_ON == debug_mode){   
-			if(OPEN == sCOM.status){						    
+			if(OPEN == sCOM.status){   
 			    len = GetInQLen(sCOM.number);
 		        if(len){
 					len = 0;
-					ComRdTerm (sCOM.number, RxBuf, 256,0x0A);
+					ComRdTerm (sCOM.number, RxBuf, 512,0x0A);
 	          	    SetCtrlVal(TabPanel_0_Handle, TABPANEL_0_TEXTBOX_R,RxBuf);   
-					memset(RxBuf,0,256);
+					memset(RxBuf,0,512);
 		   		} 
 			}
 	    }
@@ -87,19 +87,22 @@ int  CVICALLBACK ComCtrl(int panel, int control, int event, void *callbackData, 
 	        if(CLOSE == sCOM.status){
 				SetCtrlAttribute(panelHandle,PANEL_RING_COM ,ATTR_DIMMED,0);
 				SetCtrlAttribute(TabPanel_0_Handle,TABPANEL_0_RING_DEBUG_MODE ,ATTR_DIMMED,1);   
-				ComWrt (sCOM.number, "DL212 value display off", 23);      
+				ComWrt (sCOM.number, "DL212 value display off", 23);   
+				FlushOutQ (sCOM.number);
+				FlushInQ (sCOM.number);
 				CloseCom (sCOM.number); 
 			}
 			else{	
 				SetCtrlAttribute(panelHandle,PANEL_RING_COM ,ATTR_DIMMED,1); 
 				SetCtrlAttribute(TabPanel_0_Handle,TABPANEL_0_RING_DEBUG_MODE ,ATTR_DIMMED,0);    
 				res = OpenComConfig (sCOM.number, "", 115200, 0, 8, 1, 1024, 1024); 
+				FlushInQ (sCOM.number);
 				if(res < 0){
 					SetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, 0);
 				    MessagePopup ("","     串口打开失败,请检查该串口是否已经被其他程序打开     ");         
 				}
 				else{
-					SetComTime(sCOM.number,2);
+					SetComTime(sCOM.number,1);
 					FlushOutQ (sCOM.number);     
 				}	  
 			}  
@@ -115,7 +118,7 @@ int  CVICALLBACK MainPanel(int panel, int event, void *callbackData, int eventDa
 		case EVENT_LOST_FOCUS:
 			break;
 		case EVENT_CLOSE: 
-			QuitCtrl = 0;
+			QuitCtrl = 0;  
 			QuitUserInterface(0);
 			break;
 	}
@@ -297,16 +300,14 @@ int  CVICALLBACK Clock(int panel, int control, int event, void *callbackData, in
 
 
 void CVICALLBACK FileOpen (int menuBar, int menuItem, void *callbackData,int panel){
-    int  stat;	    
-	char pathname[MAX_PATHNAME_LEN];
-	int file_Handle;   
+    int  stat;	    		 
 	struct _DL212_CONFIG config;
 	unsigned char lrc;  
 			 
-    stat = FileSelectPopupEx ("", "*.DL212", "", "打开文件",VAL_LOAD_BUTTON, 0, 0, pathname);
+    stat = FileSelectPopupEx ("", "*.DL212", "", "打开文件",VAL_LOAD_BUTTON, 0, 0, PathFileName);
     if((stat == VAL_EXISTING_FILE_SELECTED) || (stat == VAL_NEW_FILE_SELECTED)){
-		file_Handle = OpenFile (pathname, VAL_READ_WRITE, VAL_OPEN_AS_IS, VAL_ASCII); 
-		ReadFile (file_Handle, (char*)&config, sizeof(config));  
+		File_Handle = OpenFile (PathFileName, VAL_READ_WRITE, VAL_OPEN_AS_IS, VAL_ASCII); 
+		ReadFile (File_Handle, (char*)&config, sizeof(config));  
 		lrc = LRC((unsigned char *)&config,sizeof(config)-4);
 		if(lrc == config.lrc){ 
 			ResetTextBox (TabPanel_2_Handle, TABPANEL_2_TEXTBOX_SDI12CMD_D1, 0);
@@ -318,7 +319,7 @@ void CVICALLBACK FileOpen (int menuBar, int menuItem, void *callbackData,int pan
 		else{
 			 MessagePopup ("读取配置","   文件校验错误    ");
 		}
-		CloseFile(file_Handle);	 
+		CloseFile(File_Handle);	 
 	}
 }
 

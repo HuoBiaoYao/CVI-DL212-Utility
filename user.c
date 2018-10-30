@@ -501,9 +501,7 @@ int SDI12CMD_Check(unsigned char port,char *c,unsigned int len){
 		else{
 			if(0 == isalnum(*c) || '!'!=*(c+len-1)){
 				return 1;			   
-			}
-			*(c+1) = '\r';
-			*(c+1) = '\n';	
+			} 	
 			IS_SDI12CMD_OK[port] = OK;
 		}  
 	}
