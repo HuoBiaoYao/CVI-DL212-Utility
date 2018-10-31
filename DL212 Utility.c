@@ -1,5 +1,5 @@
 #include "user.h"
-#include "menuutil.h"
+//#include "menuutil.h"
 
 char TxBuf[1024],RxBuf[1024];
 char PathFileName[MAX_PATHNAME_LEN];
@@ -10,7 +10,7 @@ int panelHandle;
 int TabPanel_0_Handle,TabPanel_1_Handle,TabPanel_2_Handle; 
    
 int main (int argc, char *argv[]){
-	int len; 
+	int len=0; 
 	char dirname[MAX_PATHNAME_LEN];
 	
 	if (InitCVIRTE (0, argv, 0) == 0)
@@ -32,7 +32,7 @@ int main (int argc, char *argv[]){
   	GetCtrlVal (panelHandle, PANEL_RING_COM,&sCOM.number);  
 	GetPanelValues();  	
 	SetCtrlAttribute(TabPanel_0_Handle,TABPANEL_0_TEXTBOX_R,ATTR_WRAP_MODE,VAL_CHAR_WRAP);  
-	SetSleepPolicy (VAL_SLEEP_MORE);   
+	SetSleepPolicy (VAL_SLEEP_MORE);     
     //RunUserInterface ();
 	while(QuitCtrl){
 	    ProcessSystemEvents();
@@ -388,3 +388,19 @@ void CVICALLBACK ClearBox(int menubar, int menuItem, void *callbackData, int pan
 {
     ResetTextBox (TabPanel_0_Handle, TABPANEL_0_TEXTBOX_R, 0);     
 }  
+
+void CVICALLBACK GetOSVersion(int menubar, int menuItem, void *callbackData, int panel){
+/*	if(CLOSE == sCOM.status){
+		MessagePopup ("北京华益瑞科技有限公司","     请先打开串口     ");  
+		return 0;
+	}
+	FlushOutQ (sCOM.number);  
+	FlushInQ (sCOM.number);  
+	GetCtrlVal(TabPanel_0_Handle,TABPANEL_0_RING_DEBUG_MODE,&debug_mode);  
+	strcpy(buf,"DL212 os version");
+	len = ComWrt (sCOM.number,buf,23);
+	
+	SyncWait (Timer(),0.02);
+ 
+ 		 */
+}

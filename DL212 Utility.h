@@ -147,6 +147,9 @@
 #define  MAINMENU_MENU1_2                 8
 #define  MAINMENU_MENU1_2_SEND_CONFIG     9       /* callback function: SendConfig */
 #define  MAINMENU_MENU1_2_ITEM2           10      /* callback function: ReadConfig */
+#define  MAINMENU_MENU2                   11
+#define  MAINMENU_MENU2_ITEM1             12      /* callback function: GetOSVersion */
+#define  MAINMENU_MENU2_ITEM4             13
 
 #define  MENUBAR                          2
 #define  MENUBAR_MENU1                    2
@@ -163,6 +166,7 @@ int  CVICALLBACK DebugMode(int panel, int control, int event, void *callbackData
 void CVICALLBACK FileOpen(int menubar, int menuItem, void *callbackData, int panel);
 void CVICALLBACK FileSave(int menubar, int menuItem, void *callbackData, int panel);
 void CVICALLBACK FileSaveAs(int menubar, int menuItem, void *callbackData, int panel);
+void CVICALLBACK GetOSVersion(int menubar, int menuItem, void *callbackData, int panel);
 int  CVICALLBACK MainPanel(int panel, int event, void *callbackData, int eventData1, int eventData2);
 void CVICALLBACK ReadConfig(int menubar, int menuItem, void *callbackData, int panel);
 int  CVICALLBACK RingsConfig(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
