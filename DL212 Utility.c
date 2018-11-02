@@ -11,13 +11,13 @@ int TabPanel_0_Handle,TabPanel_1_Handle,TabPanel_2_Handle;
    
 int main (int argc, char *argv[]){
 	int len=0; 
-	char dirname[MAX_PATHNAME_LEN];
+	char dirname[MAX_PATHNAME_LEN]; 
 	
 	if (InitCVIRTE (0, argv, 0) == 0)
 		return -1;	/* out of memory */
 	if ((panelHandle = LoadPanel (0, "DL212 Utility.uir", PANEL)) < 0)
 		return -1; 
-            
+                     
 	GetPanelHandleFromTabPage (panelHandle, PANEL_TAB, 0, &TabPanel_0_Handle); 
 	GetPanelHandleFromTabPage (panelHandle, PANEL_TAB, 1, &TabPanel_1_Handle);  
 	GetPanelHandleFromTabPage (panelHandle, PANEL_TAB, 2, &TabPanel_2_Handle);  
@@ -32,11 +32,11 @@ int main (int argc, char *argv[]){
   	GetCtrlVal (panelHandle, PANEL_RING_COM,&sCOM.number);  
 	GetPanelValues();  	
 	SetCtrlAttribute(TabPanel_0_Handle,TABPANEL_0_TEXTBOX_R,ATTR_WRAP_MODE,VAL_CHAR_WRAP);  
-	SetSleepPolicy (VAL_SLEEP_MORE);     
+	SetSleepPolicy (VAL_SLEEP_MORE);  
     //RunUserInterface ();
 	while(QuitCtrl){
 	    ProcessSystemEvents();
-		if(VALUE_DISPLAY_ON == debug_mode){   
+		//if(VALUE_DISPLAY_ON == debug_mode){   
 			if(OPEN == sCOM.status){   
 			    len = GetInQLen(sCOM.number);
 		        if(len){
@@ -46,7 +46,7 @@ int main (int argc, char *argv[]){
 					memset(RxBuf,0,512);
 		   		} 
 			}
-	    }
+	    //}
 	}
     DiscardPanel (panelHandle);
     CloseCVIRTE ();
@@ -242,8 +242,7 @@ void CVICALLBACK ReadConfig(int menubar, int menuItem, void *callbackData, int p
 }
 
 int  CVICALLBACK DebugMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
-	
-	int len;
+	int len,i;
 	char buf[35];
 	
 	switch (event){
@@ -255,10 +254,11 @@ int  CVICALLBACK DebugMode(int panel, int control, int event, void *callbackData
 			FlushOutQ (sCOM.number);  
 			FlushInQ (sCOM.number);  
 			GetCtrlVal(TabPanel_0_Handle,TABPANEL_0_RING_DEBUG_MODE,&debug_mode);  
+		for(i=0;i<10;i++){	
 			switch(debug_mode){
 			    case VALUE_DISPLAY_ON:
 				  	strcpy(buf,"DL212 value display on");
-					len = ComWrt (sCOM.number,buf,23);
+					len = ComWrt (sCOM.number,buf,23); 
 			    break;
 				case VALUE_DISPLAY_OFF:
 				    strcpy(buf,"DL212 value display off");
@@ -275,6 +275,8 @@ int  CVICALLBACK DebugMode(int panel, int control, int event, void *callbackData
 				default:
 				break;
 			}
+			SyncWait (Timer(),0.02);
+		}
 		break;
 	}
 	return 0;
@@ -292,7 +294,7 @@ int  CVICALLBACK Clock(int panel, int control, int event, void *callbackData, in
 			CVIAbsoluteTimeToLocalCalendar(absTime, &year, &month, &day, &hour, &min, &sec, 0, &weekDay);			    
 			sprintf(buffer, "%04d/%02d/%02d/%s %02d:%02d:%02d", year,month,day,DaysOfWeek[weekDay],hour,min,sec);   
 			SetCtrlVal(panel, PANEL_TEXTMSG_CLOCK_PC, buffer); 
-			GetCtrlVal(panelHandle,PANEL_RING_COM ,&sCOM.number);  
+			//GetCtrlVal(panelHandle,PANEL_RING_COM ,&sCOM.number);  
 			break;
 	}
 	return 0;
@@ -368,11 +370,33 @@ void CVICALLBACK FileSaveAs (int menuBar, int menuItem, void *callbackData,int p
 		}
 	} 
 }
- 
-int  CVICALLBACK TxTextBox(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
+
+int  CVICALLBACK DebugTx(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
+	char buf[10];
+	int len;
+	
+	switch (event){		    
+		case EVENT_LEFT_CLICK:
+			GetCtrlAttribute (TabPanel_0_Handle, TABPANEL_0_TEXTBOX_T, ATTR_STRING_TEXT_LENGTH, &len);
+			if(len > 1 ){ 
+				GetCtrlVal(TabPanel_0_Handle,TABPANEL_0_TEXTBOX_T,buf);	
+				if(isalnum(*buf) || '?' == *buf){
+			        if('!' == *(buf+len-1)){ 
+						ComWrt (sCOM.number,buf,len);	
+				  	} 
+				  	else{
+				  		MessagePopup ("SDI-12透传模式","     SDI-12命令格式错误	");
+				    }
+			    } 
+				else{
+					MessagePopup ("SDI-12透传模式","     SDI-12命令格式错误    ");        
+				}
+ 			}  
+		break;
+	}
 	return 0;
 }
-
+  
 int  CVICALLBACK RxTextBox(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
     int menuHandle;
 	switch (event) {
@@ -388,19 +412,4 @@ void CVICALLBACK ClearBox(int menubar, int menuItem, void *callbackData, int pan
 {
     ResetTextBox (TabPanel_0_Handle, TABPANEL_0_TEXTBOX_R, 0);     
 }  
-
-void CVICALLBACK GetOSVersion(int menubar, int menuItem, void *callbackData, int panel){
-/*	if(CLOSE == sCOM.status){
-		MessagePopup ("北京华益瑞科技有限公司","     请先打开串口     ");  
-		return 0;
-	}
-	FlushOutQ (sCOM.number);  
-	FlushInQ (sCOM.number);  
-	GetCtrlVal(TabPanel_0_Handle,TABPANEL_0_RING_DEBUG_MODE,&debug_mode);  
-	strcpy(buf,"DL212 os version");
-	len = ComWrt (sCOM.number,buf,23);
-	
-	SyncWait (Timer(),0.02);
  
- 		 */
-}

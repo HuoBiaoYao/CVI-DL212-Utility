@@ -30,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 5
+Number of Opened Files = 2
 Window Confinement Region Enabled = True
 MainColumnWidth = 229
 FileDateColumnWidth = 70
@@ -48,33 +48,32 @@ Batch Build Debug = False
 [File 0001]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.c"
 File Type = "CSource"
-Disk Date = 3623830096
+Disk Date = 3624001902
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Window Z-Order = 3
-Source Window State = "1,398,398,398,44,59,59,0,3,80,0,26,0,1,0,21,383,0,398,44,407,688,1,22,"
+Window Z-Order = 1
+Source Window State = "1,43,43,43,44,49,49,0,0,134,0,386,0,1,0,24,30,0,41,57,407,688,1,0,"
 
 [File 0002]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.uir"
 File Type = "User Interface Resource"
-Disk Date = 3623830096
+Disk Date = 3624001904
 In Projects = ""
 Window Top = 32
 Window Left = 10
 Window Height = 263
 Window Width = 528
-Window Z-Order = 1
+Window Z-Order = 2
 
 [File 0003]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.h"
 File Type = "Include"
-Disk Date = 3623830096
+Disk Date = 3624001904
 In Projects = "1,"
 Window Top = 152
 Window Left = 74
-Window Z-Order = 2
-Source Window State = "1,18,18,18,9,18,18,0,3,80,0,0,0,0,0,15,136,0,18,9,299,688,1,22,"
+Source Window State = "1,18,18,18,15,18,18,0,3,80,0,0,0,0,0,15,13,0,18,15,299,688,1,22,"
 
 [File 0004]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/user.h"
@@ -83,8 +82,7 @@ Disk Date = 3623646352
 In Projects = "1,"
 Window Top = 62
 Window Left = 26
-Window Z-Order = 4
-Source Window State = "1,61,61,61,4,18,18,0,3,80,0,11,0,10,0,15,0,0,61,4,299,688,1,14,"
+Source Window State = "1,61,61,61,4,18,18,0,3,80,0,11,0,10,0,15,24,0,61,4,299,688,1,14,"
 
 [File 0005]
 Path = "/d/GitHubRepository/CVI-DL212-Utility/user.c"
@@ -93,15 +91,11 @@ Disk Date = 3623736090
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Window Z-Order = 5
-Source Window State = "1,503,505,505,14,30,30,0,0,80,0,482,0,546,0,15,0,0,505,31,299,688,1,22,"
+Source Window State = "1,501,501,501,12,52,12,0,3,80,0,482,0,546,0,15,489,0,501,52,299,688,1,22,"
 
 [Tab Order]
 Tab 0001 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.uir"
 Tab 0002 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.c"
-Tab 0003 = "/d/GitHubRepository/CVI-DL212-Utility/user.h"
-Tab 0004 = "/d/GitHubRepository/CVI-DL212-Utility/user.c"
-Tab 0005 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.h"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

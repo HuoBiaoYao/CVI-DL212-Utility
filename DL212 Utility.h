@@ -18,17 +18,16 @@
 #define  PANEL_NUMERIC_SCAN_INTERVAL      3       /* control type: numeric, callback function: (none) */
 #define  PANEL_TAB                        4       /* control type: tab, callback function: (none) */
 #define  PANEL_RING_COM                   5       /* control type: ring, callback function: ComSelect */
-#define  PANEL_TB_COM_CTRL                6       /* control type: textButton, callback function: ComCtrl */
-#define  PANEL_STRING_POWER               7       /* control type: string, callback function: (none) */
-#define  PANEL_TEXTMSG_CLOCK_PC           8       /* control type: textMsg, callback function: (none) */
-#define  PANEL_TEXTMSG                    9       /* control type: textMsg, callback function: (none) */
-#define  PANEL_TEXTMSG_2                  10      /* control type: textMsg, callback function: (none) */
-#define  PANEL_TIMER                      11      /* control type: timer, callback function: Clock */
+#define  PANEL_TEXTMSG_CLOCK_PC           6       /* control type: textMsg, callback function: (none) */
+#define  PANEL_TEXTMSG                    7       /* control type: textMsg, callback function: (none) */
+#define  PANEL_TIMER                      8       /* control type: timer, callback function: Clock */
+#define  PANEL_TB_COM_CTRL                9       /* control type: textButton, callback function: ComCtrl */
 
      /* tab page panel controls */
-#define  TABPANEL_0_TEXTBOX_T             2       /* control type: textBox, callback function: TxTextBox */
+#define  TABPANEL_0_TEXTBOX_T             2       /* control type: textBox, callback function: (none) */
 #define  TABPANEL_0_TEXTBOX_R             3       /* control type: textBox, callback function: RxTextBox */
 #define  TABPANEL_0_RING_DEBUG_MODE       4       /* control type: ring, callback function: DebugMode */
+#define  TABPANEL_0_COMMANDBUTTON_TX      5       /* control type: command, callback function: DebugTx */
 
      /* tab page panel controls */
 #define  TABPANEL_1_RING_VX_SW_3L         2       /* control type: ring, callback function: RingsConfig */
@@ -148,8 +147,7 @@
 #define  MAINMENU_MENU1_2_SEND_CONFIG     9       /* callback function: SendConfig */
 #define  MAINMENU_MENU1_2_ITEM2           10      /* callback function: ReadConfig */
 #define  MAINMENU_MENU2                   11
-#define  MAINMENU_MENU2_ITEM1             12      /* callback function: GetOSVersion */
-#define  MAINMENU_MENU2_ITEM4             13
+#define  MAINMENU_MENU2_ITEM4             12
 
 #define  MENUBAR                          2
 #define  MENUBAR_MENU1                    2
@@ -163,17 +161,16 @@ int  CVICALLBACK Clock(int panel, int control, int event, void *callbackData, in
 int  CVICALLBACK ComCtrl(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK ComSelect(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DebugMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DebugTx(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 void CVICALLBACK FileOpen(int menubar, int menuItem, void *callbackData, int panel);
 void CVICALLBACK FileSave(int menubar, int menuItem, void *callbackData, int panel);
 void CVICALLBACK FileSaveAs(int menubar, int menuItem, void *callbackData, int panel);
-void CVICALLBACK GetOSVersion(int menubar, int menuItem, void *callbackData, int panel);
 int  CVICALLBACK MainPanel(int panel, int event, void *callbackData, int eventData1, int eventData2);
 void CVICALLBACK ReadConfig(int menubar, int menuItem, void *callbackData, int panel);
 int  CVICALLBACK RingsConfig(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK RxTextBox(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Sdi12CmdSet(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 void CVICALLBACK SendConfig(int menubar, int menuItem, void *callbackData, int panel);
-int  CVICALLBACK TxTextBox(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus
