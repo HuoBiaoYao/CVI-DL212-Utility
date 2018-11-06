@@ -32,7 +32,7 @@ int main (int argc, char *argv[]){
   	GetCtrlVal (panelHandle, PANEL_RING_COM,&sCOM.number);  
 	GetPanelValues();  	
 	SetCtrlAttribute(TabPanel_0_Handle,TABPANEL_0_TEXTBOX_R,ATTR_WRAP_MODE,VAL_CHAR_WRAP);  
-	SetSleepPolicy (VAL_SLEEP_MORE);  
+	SetSleepPolicy (VAL_SLEEP_SOME);  
     //RunUserInterface ();
 	while(QuitCtrl){
 	    ProcessSystemEvents();
@@ -44,7 +44,7 @@ int main (int argc, char *argv[]){
 					ComRdTerm (sCOM.number, RxBuf, 512,0x0A);
 	          	    SetCtrlVal(TabPanel_0_Handle, TABPANEL_0_TEXTBOX_R,RxBuf);   
 					memset(RxBuf,0,512);
-		   		} 
+		   		}  
 			}
 	    //}
 	}

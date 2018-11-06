@@ -84,6 +84,15 @@
 #define  TABPANEL_1_TEXTMSG_5             53      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG_7             54      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_1_TEXTMSG               55      /* control type: textMsg, callback function: (none) */
+#define  TABPANEL_1_RING_FILTER_L3        56      /* control type: ring, callback function: (none) */
+#define  TABPANEL_1_RING_FILTER_H3        57      /* control type: ring, callback function: (none) */
+#define  TABPANEL_1_RING_FILTER_L2        58      /* control type: ring, callback function: (none) */
+#define  TABPANEL_1_RING_FILTER_H2        59      /* control type: ring, callback function: (none) */
+#define  TABPANEL_1_RING_FILTER_L1        60      /* control type: ring, callback function: (none) */
+#define  TABPANEL_1_RING_FILTER_H1        61      /* control type: ring, callback function: (none) */
+#define  TABPANEL_1_RING_REVDIFF_HL3      62      /* control type: ring, callback function: (none) */
+#define  TABPANEL_1_RING_REVDIFF_HL2      63      /* control type: ring, callback function: (none) */
+#define  TABPANEL_1_RING_REVDIFF_HL1      64      /* control type: ring, callback function: (none) */
 
      /* tab page panel controls */
 #define  TABPANEL_2_RING_MODE_D2          2       /* control type: ring, callback function: RingsConfig */
@@ -118,15 +127,10 @@
 #define  TABPANEL_2_TEXTMSG_3             31      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_2_TEXTMSG_2             32      /* control type: textMsg, callback function: (none) */
 #define  TABPANEL_2_TEXTMSG               33      /* control type: textMsg, callback function: (none) */
-#define  TABPANEL_2_DECORATION            34      /* control type: deco, callback function: (none) */
-#define  TABPANEL_2_DECORATION_2          35      /* control type: deco, callback function: (none) */
-#define  TABPANEL_2_DECORATION_3          36      /* control type: deco, callback function: (none) */
-#define  TABPANEL_2_DECORATION_4          37      /* control type: deco, callback function: (none) */
-#define  TABPANEL_2_DECORATION_5          38      /* control type: deco, callback function: (none) */
-#define  TABPANEL_2_NUMERIC_MEATIME_PLL   39      /* control type: numeric, callback function: (none) */
-#define  TABPANEL_2_NUMERIC_MEATIME_PSW   40      /* control type: numeric, callback function: (none) */
-#define  TABPANEL_2_NUMERIC_MEATIME_D1    41      /* control type: numeric, callback function: (none) */
-#define  TABPANEL_2_NUMERIC_MEATIME_D2    42      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MEATIME_PLL   34      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MEATIME_PSW   35      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MEATIME_D1    36      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_NUMERIC_MEATIME_D2    37      /* control type: numeric, callback function: (none) */
 
 
      /* Control Arrays: */
