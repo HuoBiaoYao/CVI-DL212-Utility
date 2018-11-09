@@ -86,10 +86,7 @@ int  CVICALLBACK ComCtrl(int panel, int control, int event, void *callbackData, 
 			GetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, &sCOM.status); 
 	        if(CLOSE == sCOM.status){
 				SetCtrlAttribute(panelHandle,PANEL_RING_COM ,ATTR_DIMMED,0);
-				SetCtrlAttribute(TabPanel_0_Handle,TABPANEL_0_RING_DEBUG_MODE ,ATTR_DIMMED,1);   
-				ComWrt (sCOM.number, "DL212 value display off", 23);   
-				FlushOutQ (sCOM.number);
-				FlushInQ (sCOM.number);
+				SetCtrlAttribute(TabPanel_0_Handle,TABPANEL_0_RING_DEBUG_MODE ,ATTR_DIMMED,1); 
 				CloseCom (sCOM.number); 
 			}
 			else{	
@@ -171,15 +168,14 @@ void CVICALLBACK SendConfig(int menubar, int menuItem, void *callbackData, int p
 	
 	GetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, &sCOM.status); 
 	if(CLOSE == sCOM.status){
-		MessagePopup ("发送配置","     请先打开串口     ");     
+		MessagePopup (" 发送配置               ","                请先打开串口                ");     
 	}
 	else{
-		FlushOutQ (sCOM.number);  
-		FlushInQ (sCOM.number);  
+		FlushOutQ (sCOM.number);    
 		GetPanelValues();
-		strcpy(buf,"DL212 Configuration Utility Write");
-		len = ComWrt (sCOM.number,buf,34);
-		SyncWait (Timer(),0.02);
+		strcpy(buf,"DL212 Configuration Utility Write"); 
+		len = ComWrt (sCOM.number,buf,34);	   
+		SyncWait (Timer(),0.1);
 		p = (char *)&sDL212_CONFIG;
 		i = sizeof(sDL212_CONFIG)/60+1;
 		sDL212_CONFIG.lrc = 0;
@@ -190,54 +186,63 @@ void CVICALLBACK SendConfig(int menubar, int menuItem, void *callbackData, int p
 		}
 		memset(RxBuf,0,10);
 		len = ComWrt (sCOM.number,(const char*)(p+j*60),sizeof(sDL212_CONFIG)-j*60); 
+		FlushInQ (sCOM.number);   
  	    SyncWait (Timer(),0.02);
 		len = ComRdTerm (sCOM.number, RxBuf, 10,0x0A);   
 		if(len == -99){
-			MessagePopup ("发送配置","    未响应    ");    
+			MessagePopup (" 发送配置               ","              未响应               ");    
 			return ;
 		}
 	    if(0 == strncmp("lrc ok",RxBuf,6)){
-	   		MessagePopup ("发送配置","    发送完成，擦写FLASH需要2秒左右的时间，请不要立刻断电或者再次发送配置    ");
+	   		MessagePopup (" 发送配置               ","               发送完成               ");
 	        return ;
         } 
 		else if(0 == strncmp("lrc error",RxBuf,9)){
-			MessagePopup ("发送配置","    通讯校验错误    ");
+			MessagePopup (" 发送配置               ","               通讯校验错误               ");
 		}
-		MessagePopup ("发送配置","    未响应    ");
+		MessagePopup (" 发送配置               ","               未响应               ");
 	}
 }
 
 void CVICALLBACK ReadConfig(int menubar, int menuItem, void *callbackData, int panel){
 	int i=0,len=0;
 	unsigned char lrc=0;
-	char byte,buf[33];  
+	char byte,buf[33],*p;  
 	struct _DL212_CONFIG config;   
-				  
-	FlushOutQ (sCOM.number);  
-	FlushInQ (sCOM.number);  
-	strcpy(buf,"DL212 Configuration Utility Read");
-	len = ComWrt (sCOM.number,buf,33);
-	while(i < sizeof(config)){
-		byte = ComRdByte (sCOM.number);   
-		if(byte == -99){
-			MessagePopup ("读取配置","   未响应    ");    
-			return;
-		}
-		else{
-			memcpy(&config+i,&byte,1); 
-		}
-		i++;
-	}
-	lrc = LRC((unsigned char *)&config,sizeof(config)-4);
-	if(lrc == config.lrc){
-		ResetTextBox (TabPanel_2_Handle, TABPANEL_2_TEXTBOX_SDI12CMD_D1, 0);
-		ResetTextBox (TabPanel_2_Handle, TABPANEL_2_TEXTBOX_SDI12CMD_D2, 0); 
-		memcpy((void*)&sDL212_CONFIG,(void*)&config,sizeof(sDL212_CONFIG));
-		ATTRDimmed_Ctrl(); 
-	 	MessagePopup ("读取配置","   读取参数完成    "); 
+	
+	GetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, &sCOM.status); 
+	if(CLOSE == sCOM.status){
+		MessagePopup (" 发送配置               ","                请先打开串口                ");     
 	}
 	else{
-		 MessagePopup ("读取配置","   读取参数校验错误    ");
+		p = &config;
+		FlushOutQ (sCOM.number);  
+		FlushInQ (sCOM.number);  
+		strcpy(buf,"DL212 Configuration Utility Read");
+		len = ComWrt (sCOM.number,buf,33);
+		while(i < sizeof(config)){
+			byte = ComRdByte (sCOM.number);   
+			if(byte == -99){
+				MessagePopup (" 读取配置               ","              未响应               ");    
+				return;
+			}
+			else{
+				memcpy(p+i,&byte,1); 
+			}
+			i++;
+		}
+		lrc = LRC((unsigned char *)&config,sizeof(config)-4);
+		if(lrc == config.lrc){
+			ResetTextBox (TabPanel_2_Handle, TABPANEL_2_TEXTBOX_SDI12CMD_D1, 0);
+			ResetTextBox (TabPanel_2_Handle, TABPANEL_2_TEXTBOX_SDI12CMD_D2, 0); 
+			SetPanelValuesFromFile(&config);     
+			memcpy((void*)&sDL212_CONFIG,(void*)&config,sizeof(sDL212_CONFIG));
+			ATTRDimmed_Ctrl(); 
+	 		MessagePopup (" 读取配置               ","              读取参数完成               "); 
+		}
+		else{
+			 MessagePopup (" 读取配置               ","              读取参数校验错误               ");
+		}
 	}
 }
 
@@ -248,7 +253,7 @@ int  CVICALLBACK DebugMode(int panel, int control, int event, void *callbackData
 	switch (event){
 		case EVENT_COMMIT:
 			if(CLOSE == sCOM.status){
-	    	    MessagePopup ("调试模式","     请先打开串口     ");  
+	    	    MessagePopup (" 调试模式           ","                请先打开串口                ");  
 				return 0;
         	}
 			FlushOutQ (sCOM.number);  
@@ -319,7 +324,7 @@ void CVICALLBACK FileOpen (int menuBar, int menuItem, void *callbackData,int pan
 			ATTRDimmed_Ctrl();
 		}
 		else{
-			 MessagePopup ("读取配置","   文件校验错误    ");
+			 MessagePopup (" 读取配置               ","              文件校验错误               ");
 		}
 		CloseFile(File_Handle);	 
 	}
@@ -336,7 +341,7 @@ void CVICALLBACK FileSave (int menuBar, int menuItem, void *callbackData,int pan
 		if((stat == VAL_EXISTING_FILE_SELECTED) || (stat == VAL_NEW_FILE_SELECTED)){
 			File_Handle = OpenFile (PathFileName, VAL_READ_WRITE, VAL_OPEN_AS_IS, VAL_ASCII);
 			if(-1 == File_Handle){
-				 MessagePopup ("保存","   保存文件失败    ");   
+				 MessagePopup (" 保存           ","                保存文件失败                ");   
 			}
 			else{
 				WriteFile(File_Handle,(char*)&sDL212_CONFIG,sizeof(sDL212_CONFIG));
@@ -360,7 +365,7 @@ void CVICALLBACK FileSaveAs (int menuBar, int menuItem, void *callbackData,int p
     if ((stat == VAL_EXISTING_FILE_SELECTED) || (stat == VAL_NEW_FILE_SELECTED)){
 		file_Handle = OpenFile (pathname, VAL_READ_WRITE, VAL_OPEN_AS_IS, VAL_ASCII);
 		if(-1 == file_Handle){
-	    	MessagePopup ("保存","   另存为文件失败    ");    
+	    	MessagePopup (" 保存               ","               另存为文件失败               ");    
 		}
 		else{
 			GetPanelValues();
@@ -385,11 +390,11 @@ int  CVICALLBACK DebugTx(int panel, int control, int event, void *callbackData, 
 						ComWrt (sCOM.number,buf,len);	
 				  	} 
 				  	else{
-				  		MessagePopup ("SDI-12透传模式","     SDI-12命令格式错误	");
+				  		MessagePopup (" SDI-12透传模式               ","                SDI-12命令格式错误	               ");
 				    }
 			    } 
 				else{
-					MessagePopup ("SDI-12透传模式","     SDI-12命令格式错误    ");        
+					MessagePopup (" SDI-12透传模式               ","                SDI-12命令格式错误               ");        
 				}
  			}  
 		break;
