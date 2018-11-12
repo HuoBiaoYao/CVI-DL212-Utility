@@ -162,20 +162,34 @@ int  CVICALLBACK Sdi12CmdSet(int panel, int control, int event, void *callbackDa
 }
  
 void CVICALLBACK SendConfig(int menubar, int menuItem, void *callbackData, int panel){
-	int i=0,j=0,len;
-	char buf[66];
-    char *p;
+	int i,j,len=0;
+	char byte=0,buf[66],handshake[9]="$$$$$$$$",*p;   
 	
 	GetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, &sCOM.status); 
 	if(CLOSE == sCOM.status){
 		MessagePopup (" 发送配置               ","                请先打开串口                ");     
 	}
 	else{
+		for(i=0;i<2;i++){
+			for(j=0;j<20;j++){
+				ComWrt(sCOM.number,handshake,9);
+				SyncWait (Timer(),0.02); 
+			}
+			ComRdTerm (sCOM.number, &byte, 1,'$');     
+			if(byte == -99){
+				MessagePopup (" 发送配置               ","              未响应               ");    
+				return;
+			}
+			else if(byte == '$'){
+				break; 
+			}
+		} 
+		i = 0;   
 		FlushOutQ (sCOM.number);    
 		GetPanelValues();
-		strcpy(buf,"DL212 Configuration Utility Write"); 
-		len = ComWrt (sCOM.number,buf,34);	   
-		SyncWait (Timer(),0.1);
+		strcpy(buf,"DL212 Write"); 
+		FlushInQ (sCOM.number); 
+		len = ComWrt (sCOM.number,buf,14); 
 		p = (char *)&sDL212_CONFIG;
 		i = sizeof(sDL212_CONFIG)/60+1;
 		sDL212_CONFIG.lrc = 0;
@@ -203,8 +217,96 @@ void CVICALLBACK SendConfig(int menubar, int menuItem, void *callbackData, int p
 		MessagePopup (" 发送配置               ","               未响应               ");
 	}
 }
+/*void CVICALLBACK SendConfig(int menubar, int menuItem, void *callbackData, int panel){
+	int i=0,j=0,len;
+	char buf[66];
+    char *p;
+	
+	GetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, &sCOM.status); 
+	if(CLOSE == sCOM.status){
+		MessagePopup (" 发送配置               ","                请先打开串口                ");     
+	}
+	else{
+		FlushOutQ (sCOM.number);    
+		GetPanelValues();
+		strcpy(buf,"DL212 Write"); 
+		len = ComWrt (sCOM.number,buf,14);	   
+		SyncWait (Timer(),0.1);
+		p = (char *)&sDL212_CONFIG;
+		i = sizeof(sDL212_CONFIG)/60+1;
+		sDL212_CONFIG.lrc = 0;
+		sDL212_CONFIG.lrc = LRC((unsigned char *)p,sizeof(sDL212_CONFIG)-4); 
+		for(j=0;j<i-1;j++){
+			len = ComWrt (sCOM.number,(const char*)(p+j*60),60); 
+			SyncWait (Timer(),0.02);
+		}
+		memset(RxBuf,0,10);
+		len = ComWrt (sCOM.number,(const char*)(p+j*60),sizeof(sDL212_CONFIG)-j*60); 
+		FlushInQ (sCOM.number);   
+ 	    SyncWait (Timer(),0.02);
+		len = ComRdTerm (sCOM.number, RxBuf, 10,0x0A);   
+		if(len == -99){
+			MessagePopup (" 发送配置               ","              未响应               ");    
+			return ;
+		}
+	    if(0 == strncmp("lrc ok",RxBuf,6)){
+	   		MessagePopup (" 发送配置               ","               发送完成               ");
+	        return ;
+        } 
+		else if(0 == strncmp("lrc error",RxBuf,9)){
+			MessagePopup (" 发送配置               ","               通讯校验错误               ");
+		}
+		MessagePopup (" 发送配置               ","               未响应               ");
+	}
+}*/
 
 void CVICALLBACK ReadConfig(int menubar, int menuItem, void *callbackData, int panel){
+	int i,j,len=0;
+	unsigned char lrc=0;
+	char byte=0,buf[33],handshake[9]="$$$$$$$$",*p;  
+	struct _DL212_CONFIG config;   
+	
+	GetCtrlVal (panelHandle, PANEL_TB_COM_CTRL, &sCOM.status); 
+	if(CLOSE == sCOM.status){
+		MessagePopup (" 发送配置               ","                请先打开串口                ");     
+	}
+	else{     
+		for(i=0;i<2;i++){
+			for(j=0;j<20;j++){
+				ComWrt(sCOM.number,handshake,9);
+				SyncWait (Timer(),0.02); 
+			}
+			ComRdTerm (sCOM.number, &byte, 1,'$');     
+			if(byte == -99){
+				MessagePopup (" 读取配置               ","              未响应               ");    
+				return;
+			}
+			else if(byte == '$'){
+				break; 
+			}
+		} 
+		i = 0;
+		SyncWait (Timer(),0.02);  
+		strcpy(buf,"DL212 Read");   
+		FlushInQ (sCOM.number); 
+		len = ComWrt (sCOM.number,buf,13);
+		p = &config;     
+		ComRd(sCOM.number, p, sizeof(config));
+		lrc = LRC((unsigned char *)&config,sizeof(config)-4);
+		if(lrc == config.lrc){
+			ResetTextBox (TabPanel_2_Handle, TABPANEL_2_TEXTBOX_SDI12CMD_D1, 0);
+			ResetTextBox (TabPanel_2_Handle, TABPANEL_2_TEXTBOX_SDI12CMD_D2, 0); 
+			SetPanelValuesFromFile(&config);     
+			memcpy((void*)&sDL212_CONFIG,(void*)&config,sizeof(sDL212_CONFIG));
+			ATTRDimmed_Ctrl(); 
+	 		MessagePopup (" 读取配置               ","             读取参数完成               "); 
+		}
+		else{
+	        MessagePopup (" 读取配置               ","             读取参数失败              ");
+		}
+	}
+}
+/*void CVICALLBACK ReadConfig(int menubar, int menuItem, void *callbackData, int panel){
 	int i=0,len=0;
 	unsigned char lrc=0;
 	char byte,buf[33],*p;  
@@ -218,7 +320,7 @@ void CVICALLBACK ReadConfig(int menubar, int menuItem, void *callbackData, int p
 		p = &config;
 		FlushOutQ (sCOM.number);  
 		FlushInQ (sCOM.number);  
-		strcpy(buf,"DL212 Configuration Utility Read");
+		strcpy(buf,"DL212 Read");
 		len = ComWrt (sCOM.number,buf,33);
 		while(i < sizeof(config)){
 			byte = ComRdByte (sCOM.number);   
@@ -244,7 +346,7 @@ void CVICALLBACK ReadConfig(int menubar, int menuItem, void *callbackData, int p
 			 MessagePopup (" 读取配置               ","              读取参数校验错误               ");
 		}
 	}
-}
+}*/
 
 int  CVICALLBACK DebugMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
 	int len,i;

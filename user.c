@@ -618,3 +618,4 @@ unsigned char LRC( unsigned char *buf,unsigned short int len){
     lrc = (unsigned char)(-((char)lrc));
     return lrc;
 }   
+ 
