@@ -20,8 +20,9 @@
 #define  PANEL_RING_COM                   5       /* control type: ring, callback function: ComSelect */
 #define  PANEL_TEXTMSG_CLOCK_PC           6       /* control type: textMsg, callback function: (none) */
 #define  PANEL_TEXTMSG                    7       /* control type: textMsg, callback function: (none) */
-#define  PANEL_TIMER                      8       /* control type: timer, callback function: Clock */
-#define  PANEL_TB_COM_CTRL                9       /* control type: textButton, callback function: ComCtrl */
+#define  PANEL_TB_COM_CTRL                8       /* control type: textButton, callback function: ComCtrl */
+#define  PANEL_TIMER                      9       /* control type: timer, callback function: Clock */
+#define  PANEL_TEXTMSG_2                  10      /* control type: textMsg, callback function: (none) */
 
      /* tab page panel controls */
 #define  TABPANEL_0_TEXTBOX_T             2       /* control type: textBox, callback function: (none) */
@@ -93,6 +94,9 @@
 #define  TABPANEL_1_RING_REVDIFF_HL3      62      /* control type: ring, callback function: (none) */
 #define  TABPANEL_1_RING_REVDIFF_HL2      63      /* control type: ring, callback function: (none) */
 #define  TABPANEL_1_RING_REVDIFF_HL1      64      /* control type: ring, callback function: (none) */
+#define  TABPANEL_1_DECORATION_3          65      /* control type: deco, callback function: (none) */
+#define  TABPANEL_1_DECORATION_2          66      /* control type: deco, callback function: (none) */
+#define  TABPANEL_1_DECORATION            67      /* control type: deco, callback function: (none) */
 
      /* tab page panel controls */
 #define  TABPANEL_2_RING_MODE_D2          2       /* control type: ring, callback function: RingsConfig */
@@ -131,6 +135,11 @@
 #define  TABPANEL_2_NUMERIC_MEATIME_PSW   35      /* control type: numeric, callback function: (none) */
 #define  TABPANEL_2_NUMERIC_MEATIME_D1    36      /* control type: numeric, callback function: (none) */
 #define  TABPANEL_2_NUMERIC_MEATIME_D2    37      /* control type: numeric, callback function: (none) */
+#define  TABPANEL_2_DECORATION_5          38      /* control type: deco, callback function: (none) */
+#define  TABPANEL_2_DECORATION_4          39      /* control type: deco, callback function: (none) */
+#define  TABPANEL_2_DECORATION_3          40      /* control type: deco, callback function: (none) */
+#define  TABPANEL_2_DECORATION_2          41      /* control type: deco, callback function: (none) */
+#define  TABPANEL_2_DECORATION            42      /* control type: deco, callback function: (none) */
 
 
      /* Control Arrays: */
@@ -151,7 +160,7 @@
 #define  MAINMENU_MENU1_2_SEND_CONFIG     9       /* callback function: SendConfig */
 #define  MAINMENU_MENU1_2_ITEM2           10      /* callback function: ReadConfig */
 #define  MAINMENU_MENU2                   11
-#define  MAINMENU_MENU2_ITEM4             12
+#define  MAINMENU_MENU2_ITEM4             12      /* callback function: Version */
 
 #define  MENUBAR                          2
 #define  MENUBAR_MENU1                    2
@@ -175,6 +184,7 @@ int  CVICALLBACK RingsConfig(int panel, int control, int event, void *callbackDa
 int  CVICALLBACK RxTextBox(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Sdi12CmdSet(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 void CVICALLBACK SendConfig(int menubar, int menuItem, void *callbackData, int panel);
+void CVICALLBACK Version(int menubar, int menuItem, void *callbackData, int panel);
 
 
 #ifdef __cplusplus

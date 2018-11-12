@@ -520,3 +520,6 @@ void CVICALLBACK ClearBox(int menubar, int menuItem, void *callbackData, int pan
     ResetTextBox (TabPanel_0_Handle, TABPANEL_0_TEXTBOX_R, 0);     
 }  
  
+void CVICALLBACK Version(int menubar, int menuItem, void *callbackData, int panel){
+	MessagePopup (" About DL212 Utility            ","DL212 Utility  V1.0.0\nCopyright(C)2018 北京华益瑞科技有限公司. "); 
+}

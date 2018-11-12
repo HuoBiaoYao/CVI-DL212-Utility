@@ -1,22 +1,22 @@
 [Workspace Header]
 Version = 1700
-Pathname = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.cws"
-CVI Dir = "/c/program files/national instruments/cvi2017"
-CVI Shared Dir = "/C/Program Files/National Instruments/Shared/CVI"
+Pathname = "/e/so work/github/CVI-DL212-Utility/DL212 Utility.cws"
+CVI Dir = "/c/program files (x86)/national instruments/cvi2017"
+CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
 CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2017"
 CVI Pub Global Dir = "/C/ProgramData/National Instruments/CVI"
-IVI Standard Root Dir = "/C/Program Files/IVI Foundation/IVI"
+IVI Standard Root Dir = "/C/Program Files (x86)/IVI Foundation/IVI"
 IVI Standard Root 64-bit Dir = "/C/Program Files/IVI Foundation/IVI"
-VXIplug&play Framework Dir = "/C/Program Files/IVI Foundation/VISA/winnt"
+VXIplug&play Framework Dir = "/C/Program Files (x86)/IVI Foundation/VISA/winnt"
 VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
 Number of Projects = 1
 Active Project = 1
 Project 0001 = "DL212 Utility.prj"
-Drag Bar Left = 186
-Window Top = 282
-Window Left = 299
-Window Bottom = 784
-Window Right = 1089
+Drag Bar Left = 243
+Window Top = 7
+Window Left = 2184
+Window Bottom = 584
+Window Right = 2958
 Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
@@ -30,9 +30,9 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 4
+Number of Opened Files = 5
 Window Confinement Region Enabled = True
-MainColumnWidth = 169
+MainColumnWidth = 226
 FileDateColumnWidth = 70
 FileSizeColumnWidth = 70
 
@@ -46,60 +46,62 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.c"
+Path = "/e/so work/github/CVI-DL212-Utility/DL212 Utility.c"
 File Type = "CSource"
-Disk Date = 3624858808
+Disk Date = 3624875202
 In Projects = "1,"
 Window Top = 62
 Window Left = 18
-Window Z-Order = 1
-Source Window State = "1,198,198,198,12,20,20,0,0,142,0,386,0,1,0,24,427,0,439,18,407,688,1,0,"
+Window Z-Order = 2
+Source Window State = "1,523,523,523,117,141,117,0,0,109,0,147,0,1,0,32,21,0,37,8,407,688,1,22,"
 
 [File 0002]
-Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.uir"
+Path = "/e/so work/github/CVI-DL212-Utility/DL212 Utility.uir"
 File Type = "User Interface Resource"
-Disk Date = 3624854200
+Disk Date = 3624880378
 In Projects = ""
 Window Top = 92
 Window Left = 34
 Window Height = 407
 Window Width = 688
-Window Z-Order = 3
+Window Z-Order = 1
 
 [File 0003]
-Path = "/d/GitHubRepository/CVI-DL212-Utility/user.c"
+Path = "/e/so work/github/CVI-DL212-Utility/user.c"
 File Type = "CSource"
-Disk Date = 3624856188
+Disk Date = 3624871539
 In Projects = "1,"
 Window Top = 152
 Window Left = 66
-Window Z-Order = 2
-Source Window State = "1,620,622,622,0,0,4,0,0,80,0,245,0,609,0,23,600,0,620,1,455,688,1,22,"
+Window Z-Order = 4
+Source Window State = "1,620,622,622,0,0,4,0,0,109,0,245,0,609,0,36,87,0,97,25,455,688,1,22,"
 
 [File 0004]
-Path = "/d/GitHubRepository/CVI-DL212-Utility/user.h"
+Path = "/e/so work/github/CVI-DL212-Utility/user.h"
 File Type = "Include"
-Disk Date = 3624341668
+Disk Date = 3624871539
 In Projects = "1,"
 Window Top = 62
 Window Left = 26
-Window Z-Order = 4
-Source Window State = "1,40,41,40,2,29,2,0,0,80,0,11,0,10,0,15,27,0,42,37,299,688,1,14,"
+Window Z-Order = 5
+Source Window State = "1,40,41,40,2,29,2,0,0,109,0,11,0,10,0,23,27,0,42,37,299,688,1,14,"
 
 [File 0005]
-Path = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.h"
+Path = "/e/so work/github/CVI-DL212-Utility/DL212 Utility.h"
 File Type = "Include"
-Disk Date = 3624854200
+Disk Date = 3624880378
 In Projects = "1,"
 Window Top = 152
 Window Left = 74
-Source Window State = "1,91,91,91,9,34,34,0,3,0,0,0,0,0,0,0,75,0,91,9,299,688,1,22,"
+Window Z-Order = 3
+Source Window State = "1,177,178,178,0,88,88,0,3,109,0,0,0,0,0,23,148,0,177,0,299,688,1,22,"
 
 [Tab Order]
-Tab 0001 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.c"
-Tab 0002 = "/d/GitHubRepository/CVI-DL212-Utility/DL212 Utility.uir"
-Tab 0003 = "/d/GitHubRepository/CVI-DL212-Utility/user.h"
-Tab 0004 = "/d/GitHubRepository/CVI-DL212-Utility/user.c"
+Tab 0001 = "/e/so work/github/CVI-DL212-Utility/user.h"
+Tab 0002 = "/e/so work/github/CVI-DL212-Utility/DL212 Utility.uir"
+Tab 0003 = "/e/so work/github/CVI-DL212-Utility/user.c"
+Tab 0004 = "/e/so work/github/CVI-DL212-Utility/DL212 Utility.c"
+Tab 0005 = "/e/so work/github/CVI-DL212-Utility/DL212 Utility.h"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
