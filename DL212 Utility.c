@@ -349,8 +349,8 @@ void CVICALLBACK ReadConfig(int menubar, int menuItem, void *callbackData, int p
 }*/
 
 int  CVICALLBACK DebugMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
-	int len,i;
-	char buf[35];
+	int len,i,j;
+	char byte,buf[35],handshake[9]="$$$$$$$$";
 	
 	switch (event){
 		case EVENT_COMMIT:
@@ -361,29 +361,42 @@ int  CVICALLBACK DebugMode(int panel, int control, int event, void *callbackData
 			FlushOutQ (sCOM.number);  
 			FlushInQ (sCOM.number);  
 			GetCtrlVal(TabPanel_0_Handle,TABPANEL_0_RING_DEBUG_MODE,&debug_mode);  
-		for(i=0;i<10;i++){	
+			
+			for(i=0;i<2;i++){
+				for(j=0;j<20;j++){
+					ComWrt(sCOM.number,handshake,9);
+					SyncWait (Timer(),0.02); 
+				}
+				ComRdTerm (sCOM.number, &byte, 1,'$');     
+				if(byte == -99){
+					MessagePopup (" 调试模式               ","              未响应               ");    
+					return;
+				}
+				else if(byte == '$'){
+					break; 
+				}
+			} 	     
+			FlushInQ (sCOM.number);     
 			switch(debug_mode){
 			    case VALUE_DISPLAY_ON:
-				  	strcpy(buf,"DL212 value display on");
-					len = ComWrt (sCOM.number,buf,23); 
+				  	strcpy(buf,"DL212 display on");
+					len = ComWrt (sCOM.number,buf,17); 
 			    break;
 				case VALUE_DISPLAY_OFF:
-				    strcpy(buf,"DL212 value display off");
-					len = ComWrt (sCOM.number,buf,24);
+				    strcpy(buf,"DL212 display off");
+					len = ComWrt (sCOM.number,buf,18);
 			    break;
 				case SDI12_0_TRANSPARENT:
-				    strcpy(buf,"DL212 c1 port sdi12 transparent");
-					len = ComWrt (sCOM.number,buf,33);
+				    strcpy(buf,"DL212 c1 sdi12 transparent");
+					len = ComWrt (sCOM.number,buf,27);
 			    break;
 				case SDI12_1_TRANSPARENT:
-				    strcpy(buf,"DL212 c2 port sdi12 transparent");
-					len = ComWrt (sCOM.number,buf,33);
+				    strcpy(buf,"DL212 c2 sdi12 transparent");
+					len = ComWrt (sCOM.number,buf,27);
 			    break;
 				default:
 				break;
-			}
-			SyncWait (Timer(),0.02);
-		}
+			}	  
 		break;
 	}
 	return 0;

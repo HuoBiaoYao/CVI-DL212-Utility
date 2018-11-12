@@ -13,9 +13,9 @@ Number of Projects = 1
 Active Project = 1
 Project 0001 = "DL212 Utility.prj"
 Drag Bar Left = 243
-Window Top = 7
+Window Top = 31
 Window Left = 2184
-Window Bottom = 584
+Window Bottom = 608
 Window Right = 2958
 Maximized = True
 Maximized Children = True
@@ -48,17 +48,17 @@ Batch Build Debug = False
 [File 0001]
 Path = "/e/so work/github/CVI-DL212-Utility/DL212 Utility.c"
 File Type = "CSource"
-Disk Date = 3624875202
+Disk Date = 3624882503
 In Projects = "1,"
 Window Top = 62
 Window Left = 18
 Window Z-Order = 2
-Source Window State = "1,523,523,523,117,141,117,0,0,109,0,147,0,1,0,32,21,0,37,8,407,688,1,22,"
+Source Window State = "1,374,375,375,24,24,24,0,0,109,0,147,0,1,0,32,350,0,379,49,407,688,1,22,"
 
 [File 0002]
 Path = "/e/so work/github/CVI-DL212-Utility/DL212 Utility.uir"
 File Type = "User Interface Resource"
-Disk Date = 3624880378
+Disk Date = 3624883384
 In Projects = ""
 Window Top = 92
 Window Left = 34
@@ -73,8 +73,8 @@ Disk Date = 3624871539
 In Projects = "1,"
 Window Top = 152
 Window Left = 66
-Window Z-Order = 4
-Source Window State = "1,620,622,622,0,0,4,0,0,109,0,245,0,609,0,36,87,0,97,25,455,688,1,22,"
+Window Z-Order = 3
+Source Window State = "1,620,622,622,0,0,4,0,0,109,0,245,0,609,0,36,87,0,92,43,455,688,1,22,"
 
 [File 0004]
 Path = "/e/so work/github/CVI-DL212-Utility/user.h"
@@ -93,7 +93,7 @@ Disk Date = 3624880378
 In Projects = "1,"
 Window Top = 152
 Window Left = 74
-Window Z-Order = 3
+Window Z-Order = 4
 Source Window State = "1,177,178,178,0,88,88,0,3,109,0,0,0,0,0,23,148,0,177,0,299,688,1,22,"
 
 [Tab Order]
